@@ -1,0 +1,96 @@
+/* styles.css */
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 15px;
+  }
+  
+  .header__logo img {
+    width: 100px;
+  }
+  
+  .header__nav {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .header__link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .header__link--active {
+    color: #00274D;
+    border-bottom: 2px solid #00274D;
+  }
+  
+  .header__signup {
+    background-color: #00274D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Footer Styles */
+  .footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    background-color: #d2d9e3;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .footer__logo img {
+    width: 300px;
+  }
+  
+  .footer__social h4 {
+    margin-bottom: 10px;
+  }
+  
+  .footer__nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer__link {
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .footer__subscribe {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer__input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .footer__button {
+    background-color: #00274D;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .footer__copy {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
