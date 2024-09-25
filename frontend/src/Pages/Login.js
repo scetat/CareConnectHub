@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/login.css';
 import Header from '../components/Header'; 
 import Footer from '../components/Footer'; 
-import logo from '../Assets/img/logo.png';
+import logo from '../Assests/logo.png';
 
 const Login = () => {
   return (
