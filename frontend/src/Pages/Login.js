@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/login.css';
 import Header from '../components/Header'; 
 import Footer from '../components/Footer'; 
-
+import logo from '../Assets/img/logo.png';
 
 const Login = () => {
   return (
@@ -10,9 +10,8 @@ const Login = () => {
       <Header />
 
       <div className="logo-container">
-        {/* Logo */}
         <img
-          src="/Assests/logo.png"
+          src={logo}  
           alt="Care Connect Hub Logo"
           className="logo"
         />
