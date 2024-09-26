@@ -9,11 +9,11 @@ const Login = () => {
     <div className="login-container">
       <Header />
 
-      <div className="logo-container">
+      <div className="login-logo-container">
         <img
           src={logo}  
           alt="Care Connect Hub Logo"
-          className="logo"
+          className="login-logo"
         />
         <h1>CARE CONNECT HUB</h1>
       </div>
@@ -42,7 +42,7 @@ const Login = () => {
         </button>
       </form>
 
-      <div className="signup-link">
+      <div className="login-signup-link">
         <p>Don’t Have an Account? <a href="/signup">Sign Up</a></p>
       </div>
 
