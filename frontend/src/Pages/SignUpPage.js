@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/style.css';
+import '../css/signup.css'; 
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -8,12 +8,13 @@ export default function SignUpPage() {
     email: '',
     phone: '',
     houseNo: '',
-    streetName: '',
+    street: '',
     city: '',
-    postalCode: '',
+    zipCode: '',
     province: '',
-    country: '',
-    userType: 'Caretaker',
+    stateName: '', 
+    countryName: '', 
+    roleName: 'Caretaker', 
     password: '',
     confirmPassword: '',
   });
@@ -28,9 +29,9 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log('Form Data:', formData);
-    
+
+    console.log('Form Data:', formData); 
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
       return;
@@ -50,19 +51,20 @@ export default function SignUpPage() {
 
       if (response.ok) {
         alert('User registered successfully!');
-        //future use for redirection.
+        //Redirection for future use.
         setFormData({
           firstName: '',
           lastName: '',
           email: '',
           phone: '',
           houseNo: '',
-          streetName: '',
+          street: '',
           city: '',
-          postalCode: '',
+          zipCode: '',
           province: '',
-          country: '',
-          userType: 'Caretaker',
+          stateName: '',
+          countryName: '',
+          roleName: 'Caretaker',
           password: '',
           confirmPassword: '',
         });
@@ -83,6 +85,7 @@ export default function SignUpPage() {
         </div>
       </h1>
       <form onSubmit={handleSubmit}>
+      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
@@ -109,6 +112,8 @@ export default function SignUpPage() {
             />
           </div>
         </div>
+
+      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -130,11 +135,13 @@ export default function SignUpPage() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="+1(123) 456-7890"
+              placeholder="123 456 7890"
               required
             />
           </div>
         </div>
+
+      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="houseNo">House No.</label>
@@ -149,17 +156,20 @@ export default function SignUpPage() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="streetName">Street Name</label>
+            <label htmlFor="street">Street Name</label>
             <input
               type="text"
-              id="streetName"
-              name="streetName"
-              value={formData.streetName}
+              id="street"
+              name="street"
+              value={formData.street}
               onChange={handleChange}
               placeholder="Main St"
               required
             />
           </div>
+        </div>
+
+        <div className="form-row">
           <div className="form-group">
             <label htmlFor="city">City</label>
             <input
@@ -172,15 +182,13 @@ export default function SignUpPage() {
               required
             />
           </div>
-        </div>
-        <div className="form-row">
           <div className="form-group">
-            <label htmlFor="postalCode">Postal Code</label>
+            <label htmlFor="zipCode">Postal Code</label>
             <input
               type="text"
-              id="postalCode"
-              name="postalCode"
-              value={formData.postalCode}
+              id="zipCode"
+              name="zipCode"
+              value={formData.zipCode}
               onChange={handleChange}
               placeholder="N3E 1V9"
               required
@@ -198,33 +206,55 @@ export default function SignUpPage() {
               required
             />
           </div>
+        </div>
+
+       
+        <div className="form-row">
           <div className="form-group">
-            <label htmlFor="country">Country</label>
+            <label htmlFor="stateName">State</label>
             <input
               type="text"
-              id="country"
-              name="country"
-              value={formData.country}
+              id="stateName"
+              name="stateName"
+              value={formData.stateName}
+              onChange={handleChange}
+              placeholder="State"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="countryName">Country</label>
+            <input
+              type="text"
+              id="countryName"
+              name="countryName"
+              value={formData.countryName}
               onChange={handleChange}
               placeholder="Canada"
               required
             />
           </div>
         </div>
+
+      
         <div className="form-row">
           <div className="form-group">
-            <label htmlFor="userType">User Type</label>
+            <label htmlFor="roleName">Role Name</label>
             <select
-              id="userType"
-              name="userType"
-              value={formData.userType}
+              id="roleName"
+              name="roleName"
+              value={formData.roleName}
               onChange={handleChange}
               required
             >
               <option value="Caretaker">Caretaker</option>
-              <option value="Patient">Caregiver</option>
+              <option value="Caregiver">Caregiver</option>
             </select>
           </div>
+        </div>
+
+      
+        <div className="form-row">
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -248,10 +278,12 @@ export default function SignUpPage() {
             />
           </div>
         </div>
+
+      
         <button type="submit" className="sign-up-button">Sign Up</button>
       </form>
       <p className="login-link">
-        Already Have Account? <a href="/login">Sign In</a>
+        Already Have Account? <a href="/Login">Sign In</a>
       </p>
     </div>
   );
