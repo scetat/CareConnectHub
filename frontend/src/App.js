@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Home from './Pages/Home';
 import Footer from './components/Footer';
 import SignUpPage from './Pages/SignUpPage';
+import Login from './Pages/Login';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
      <Routes>
        <Route path='/' exact={true} element={<Home/>} />
        <Route path='/signup' element={<SignUpPage/>} />
+       <Route path='/login' element={<Login/>} /> 
      </Routes>
      <Footer/>
    </BrowserRouter>
