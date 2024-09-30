@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../../css/style.css';
-import { Link } from 'react-router-dom';
-
+import { Link } from 'react-router-dom'; // Use Link for routing
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState('home'); // Default active link
@@ -18,48 +17,46 @@ const Header = () => {
         <img src="/logo.png" alt="Care Connect Hub" />
       </div>
       <div className={`header__nav ${isMenuOpen ? 'open' : ''}`}>
-        <a
-          href="/home"
+        <Link
+          to="/home"
           className={`header__link ${activeLink === 'home' ? 'header__link--active' : ''}`}
           onClick={() => handleLinkClick('home')}
         >
           HOME
-        </a>
-        <a
-          href="/events"
+        </Link>
+        <Link
+          to="/events"
           className={`header__link ${activeLink === 'events' ? 'header__link--active' : ''}`}
           onClick={() => handleLinkClick('events')}
         >
           EVENT
-        </a>
-        <a
-          href="/caregiver"
+        </Link>
+        <Link
+          to="/caregiver"
           className={`header__link ${activeLink === 'caregiver' ? 'header__link--active' : ''}`}
           onClick={() => handleLinkClick('caregiver')}
         >
           CAREGIVER
-        </a>
-        <a
-          href="/booking"
+        </Link>
+        <Link
+          to="/booking"
           className={`header__link ${activeLink === 'booking' ? 'header__link--active' : ''}`}
           onClick={() => handleLinkClick('booking')}
         >
           BOOKING
-        </a>
-        <a
-          href="/about"
+        </Link>
+        <Link
+          to="/about"
           className={`header__link ${activeLink === 'about' ? 'header__link--active' : ''}`}
           onClick={() => handleLinkClick('about')}
         >
           ABOUT US
-        </a>
+        </Link>
       </div>
       <button className="header__signup">Sign-up</button>
       <button className="header__hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         &#9776; {/* Hamburger icon */}
       </button>
-     
-
     </header>
   );
 };
