@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/signup.css'; 
 
 export default function SignUpPage() {
@@ -283,8 +284,9 @@ export default function SignUpPage() {
         <button type="submit" className="sign-up-button">Sign Up</button>
       </form>
       <p className="login-link">
-        Already Have Account? <a href="/Login">Sign In</a>
+        Already Have an Account? <Link to="/login">Sign In</Link>
       </p>
+
     </div>
   );
 }
