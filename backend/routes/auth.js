@@ -8,7 +8,6 @@ const Country = require('../models/Country');
 
 const router = express.Router();
 
-//Signup Route
 router.post('/signup', async (req, res) => {
   console.log('Received data:', req.body); 
 
@@ -75,17 +74,14 @@ router.post('/signup', async (req, res) => {
       State: state._id
     });
     await address.save();
-
-    //Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
+    const salt = 10
+    
     user = new User({
       FirstName: firstName,
       LastName: lastName,
       Email: email,
       Phone: phone,
-      Password: hashedPassword, 
+      Password: password, 
       Role: role._id,
       Address: address._id
     });
@@ -99,31 +95,33 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// Login Route
 router.post('/login', async (req, res) => {
+  console.log('Login route hit'); 
   const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required.' });
-  }
 
   try {
     const user = await User.findOne({ Email: email });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials.' });
+    const isMatch = user && bcrypt.compareSync(password,user.Password)
+
+    if (!user || !isMatch) {
+      console.error('Invalid password for user:', user);
+      console.error('Invalid password for user:', password);
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.Password);
-    if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials.' });
-    }
-
-    const { Password, ...userInfo } = user._doc;
-    return res.status(200).json({ message: 'Login successful', user: userInfo });
+    return res.status(200).json({
+      message: 'Login successful',
+      user: {
+        id: user._id,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        email: user.Email,
+        phone: user.Phone,
+      },
+    });
   } catch (error) {
     console.error('Error during login:', error);
     return res.status(500).json({ message: 'Server error' });
   }
 });
-
 module.exports = router;
