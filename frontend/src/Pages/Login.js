@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/login.css';
-import logo from '../Assests/logo.png';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/login.css";
+import logo from "../Assests/logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const response = await fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
+
+    const response = await fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
     });
@@ -23,7 +23,7 @@ const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
-      navigate('/'); 
+      navigate("/");
     } else {
       setError(data.message);
     }
@@ -32,11 +32,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-logo-container">
-        <img
-          src={logo}  
-          alt="Care Connect Hub Logo"
-          className="login-logo"
-        />
+        <img src={logo} alt="Care Connect Hub Logo" className="login-logo" />
         <h1>SIGN IN</h1>
       </div>
 
@@ -77,7 +73,9 @@ const Login = () => {
       </form>
 
       <div className="login-signup-link">
-        <p>Don’t Have an Account? <a href="/signup">Sign Up</a></p>
+        <p>
+          Don’t Have an Account? <a href="/signup">Sign Up</a>
+        </p>
       </div>
     </div>
   );
