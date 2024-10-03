@@ -1,6 +1,16 @@
 # CareConnectHub
 Respected professor,
 
+Introduction:
+This portal is designed to connect caretakers and caregivers, making it easier for caretakers to find and book caregivers in their local area. Caretakers can browse available caregivers, check their profiles, and schedule appointments based on caregiver availability. Caregivers, in turn, can view and manage these appointments, ensuring they provide timely and efficient in-home care services. The platform streamlines the process of finding care services, enabling users to connect quickly and conveniently.
+
+Till now we have completed below pages:
+Frontend:
+Home(Caregiver), Home(Caretaker), Event, Aboutus, Signup, Login
+
+Backend:
+Signup, Login, Event, Home & Database setup
+
 
 Here are the detailed steps on how to run a website.
  
