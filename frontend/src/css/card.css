@@ -1,0 +1,41 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .image-placeholder {
+    background-color: #f0f0f0;
+    height: 100px;
+    margin-bottom: 16px;
+  }
+  
+  .rating {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  
+  .filled {
+    color: gold;
+  }
+  
+  .empty {
+    color: #ccc;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

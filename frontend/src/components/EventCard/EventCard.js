@@ -1,18 +1,18 @@
 import React from 'react';
-import '../../css/style.css'
+import '../../css/card.css'; // Assuming you have a CSS file for styling
 
-const EventCard = ({ event }) => {
+const Card = () => {
   return (
-    <div className="event-card">
-      <div className="event-card__image">
-        <img src={event.image} alt={event.title} />
+    <div className="card">
+      <div className="image-placeholder"></div>
+      <h2>Event Name </h2>
+      <div className="rating">
+      <p> this is the event where all can partciante.</p>
       </div>
-      <div className="event-card__content">
-        <h3>{event.title}</h3>
-        <p>{event.description}</p>
-      </div>
+      <p>Available: Weekdays</p>
+      <button>More info</button>
     </div>
   );
 };
 
-export default EventCard;
+export default Card;

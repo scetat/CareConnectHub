@@ -1,19 +1,35 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import '../css/style.css'
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import EventCard from '../components/EventCard/EventCard'; 
-import events from '../data/eventData';// Import your EventCard component
+
 
 const EventPage = () => {
+  const [events, setEvents] = useState([]);
+
+  // Fetch events from backend
+  useEffect(() => {
+    fetch('http://localhost:5000/api/events') // Use the full backend URL with port
+      .then((response) => response.json())
+      .then((data) => setEvents(data))
+      .catch((error) => console.error('Error fetching events:', error));
+  }, []);
+  
+  
+
   return (
+    
     <div className="event-page">
-      <h1>Upcoming Events</h1>
-      <div className="event-list">
-        {events.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
-      </div>
+      {events.map((event) => (
+        <div className="event-card" key={event._id}>
+          <img src={event.imageUrl} alt={event.name} className="event-image" />
+          <h3>{event.event_name}</h3>
+          <p>{event.description}</p>
+          <h4> Date : {event.date}</h4>
+          <h4>Time : {event.time}</h4>
+          <h4>Location : {event.address}</h4>
+          
+        </div>
+      ))}
     </div>
   );
 };

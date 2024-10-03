@@ -3,7 +3,7 @@ import '../../css/style.css';
 import { Link } from 'react-router-dom'; // Use Link for routing
 
 const Header = () => {
-  const [activeLink, setActiveLink] = useState('home'); // Default active link
+  const [activeLink, setActiveLink] = useState(''); // Default active link
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
 
   const handleLinkClick = (link) => {
