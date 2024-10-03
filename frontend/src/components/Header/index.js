@@ -53,7 +53,9 @@ const Header = () => {
           ABOUT US
         </Link>
       </div>
+      <Link to="/signup">
       <button className="header__signup">Sign-up</button>
+      </Link>
       <button className="header__hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         &#9776; {/* Hamburger icon */}
       </button>

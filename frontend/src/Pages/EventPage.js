@@ -8,7 +8,7 @@ const EventPage = () => {
 
   // Fetch events from backend
   useEffect(() => {
-    fetch('http://localhost:5000/api/events') // Use the full backend URL with port
+    fetch('http://localhost:8000/api/events') // Use the full backend URL with port
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error('Error fetching events:', error));
