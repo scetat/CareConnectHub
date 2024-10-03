@@ -1,14 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // If CORS is still needed
-const eventRoutes = require('./routes/eventRoutes'); // Import event routes
+const cors = require('cors'); 
+const eventRoutes = require('./routes/eventRoutes'); 
 
 const app = express();
 
 // Middleware to handle JSON requests
 app.use(express.json());
 
-// Use CORS if your frontend and backend are on different ports
+
 app.use(cors());
 
 // Connect to MongoDB
@@ -20,9 +20,9 @@ mongoose.connect('mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.ne
 .catch(error => console.error('MongoDB connection error:', error));
 
 // API Routes
-app.use('/api', eventRoutes); // Use the event routes under '/api' path
+app.use('/api', eventRoutes); 
 
-// Serve React app (assuming you're using the same server for frontend)
+// Serve React app 
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'client/build')));
 
