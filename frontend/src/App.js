@@ -6,6 +6,7 @@ import SignUpPage from "./Pages/SignUpPage";
 import "./index.css";
 import CaregiverHome from "./Pages/CaregiverHome";
 import About from './Pages/AboutUs';
+import EventPage from './Pages/EventPage';
 
 function App() {
   return (
@@ -13,9 +14,12 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" exact={true} element={<Home />} />
+        
+        <Route path="/home" exact={true} element={<Home />} />
         <Route path="/caregiver" exact={true} element={<CaregiverHome />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/about" exact={true} element={<About/>} />
+        <Route path='/events' element={<EventPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
