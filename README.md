@@ -21,7 +21,7 @@ The platform streamlines the process of finding care services, enabling users to
   - [Frontend Setup](#frontend-setup)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-- [License](#license)
+  
 
 ## Features
 
@@ -100,11 +100,7 @@ Once both frontend and backend servers are running, you can access the applicati
   - Express.js
   - MongoDB
 
-## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
----
 
 Thank you!  
 **Connect Hub Team**
