@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const HomeContent = require("../models/HomeContent");
 
 const dbURI =
-  "mongodb+srv://ogbunnamdi:1B8sbjVu47lHrWa2@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/";
 
 const seedData = {
   heroImage: "client-home.png",

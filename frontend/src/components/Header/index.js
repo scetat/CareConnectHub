@@ -38,13 +38,8 @@ const Header = () => {
         >
           CAREGIVER
         </Link>
-        <Link
-          to="/booking"
-          className={`header__link ${activeLink === 'booking' ? 'header__link--active' : ''}`}
-          onClick={() => handleLinkClick('booking')}
-        >
-          BOOKING
-        </Link>
+     
+        
         <Link
           to="/about"
           className={`header__link ${activeLink === 'about' ? 'header__link--active' : ''}`}
@@ -53,7 +48,7 @@ const Header = () => {
           ABOUT US
         </Link>
       </div>
-      <Link to="/signup">
+      <Link to="/signup" classname="no-link">
       <button className="header__signup">Sign-up</button>
       </Link>
       <button className="header__hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>

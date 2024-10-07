@@ -8,6 +8,9 @@
   background-color: #f7f7f7;
   padding: 15px;
 }
+.header a{
+  text-decoration: none;
+}
 
 .header__logo img {
   width: 100px;
@@ -36,6 +39,7 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 /* Hamburger Menu Styles */
