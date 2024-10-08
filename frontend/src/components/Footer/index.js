@@ -15,7 +15,7 @@ const Footer = () => {
       <div className="footer__nav">
         <a href="/home" className="footer__link">HOME</a>
         <a href="/events" className="footer__link">EVENT</a>
-        <a href="/caregiver" className="footer__link">CAREGIVER</a>
+        <a href="/caregivermatch" className="header__link">CAREGIVER</a>
         <a href="/booking" className="footer__link">BOOKING</a>
         <a href="/about" className="footer__link">ABOUT US</a>
       </div>

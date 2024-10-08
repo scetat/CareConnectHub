@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import SignUpPage from "./Pages/SignUpPage";
 import "./index.css";
 import CaregiverHome from "./Pages/CaregiverHome";
+import CaregiverMatch from "./Pages/CaregiverMatch";
 import About from './Pages/AboutUs';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" exact={true} element={<Home />} />
-        <Route path="/caregiver" exact={true} element={<CaregiverHome />} />
+        <Route path="/caregivermatch" exact={true} element={<CaregiverMatch />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/about" exact={true} element={<About/>} />
       </Routes>

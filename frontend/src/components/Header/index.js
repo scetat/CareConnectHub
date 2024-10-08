@@ -13,7 +13,7 @@ const Header = () => {
       <nav className="header__nav">
         <a href="/home" className="header__link header__link--active">HOME</a>
         <a href="/events" className="header__link">EVENT</a>
-        <a href="/caregiver" className="header__link">CAREGIVER</a>
+        <a href="/caregivermatch" className="header__link">CAREGIVER</a>
         <a href="/booking" className="header__link">BOOKING</a>
         <a href="/about" className="header__link">ABOUT US</a>
       </nav>
