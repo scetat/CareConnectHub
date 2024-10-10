@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 // MongoDB connection (using the second file's URI)
 mongoose
-  .connect("mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/", {
+  .connect("mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

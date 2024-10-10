@@ -23,6 +23,9 @@ const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
+      // Store login status in localStorage
+      localStorage.setItem('isLoggedIn', 'true');
+     
       navigate('/'); 
     } else {
       setError(data.message);
