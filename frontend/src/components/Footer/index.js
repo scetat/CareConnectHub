@@ -29,7 +29,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="footer__copy"> 2024, Care Connect Hub, All Rights Reserved.</p>
     </footer>
   );
 };
