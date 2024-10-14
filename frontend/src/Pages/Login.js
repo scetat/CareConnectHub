@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+    const response = await fetch('http://localhost:8000/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,6 +23,9 @@ const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
+      // Store login status in localStorage
+      localStorage.setItem('isLoggedIn', 'true');
+     
       navigate('/'); 
     } else {
       setError(data.message);
