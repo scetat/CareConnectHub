@@ -9,6 +9,7 @@ import About from "./Pages/AboutUs";
 import EventPage from "./Pages/EventPage";
 import ManageProfile from "./Pages/ManageProfile";
 import Login from "./Pages/Login";
+import Moreinfo from "./Pages/Moreinfo";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/about" exact={true} element={<About />} />
         <Route path="/events" element={<EventPage />} />
         <Route path="/manage" element={<ManageProfile />} />
+        <Route path="/Moreinfo" element={<Moreinfo />} />
       </Routes>
       <Footer />
     </BrowserRouter>
