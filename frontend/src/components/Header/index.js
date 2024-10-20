@@ -1,14 +1,39 @@
 import React, { useState } from 'react';
 import '../../css/style.css';
-import { Link } from 'react-router-dom'; // Use Link for routing
+import { Link } from 'react-router-dom';
+import LogoutButton from '../Logout/logout';
 
 const Header = () => {
-  const [activeLink, setActiveLink] = useState('home'); // Default active link
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
+  const [activeLink, setActiveLink] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown state
+
+  useEffect(() => {
+    const loggedInStatus = localStorage.getItem('isLoggedIn');
+    setIsLoggedIn(loggedInStatus === 'true');
+
+    const savedActiveLink = localStorage.getItem('activeLink') || 'home';
+    setActiveLink(savedActiveLink);
+  }, []);
 
   const handleLinkClick = (link) => {
-    setActiveLink(link);
-    setIsMenuOpen(false); // Close menu when a link is clicked
+    if (activeLink !== link) {
+      setActiveLink(link);
+      localStorage.setItem('activeLink', link);
+      setIsMenuOpen(false);
+    }
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown
+  };
+
+  const resetHeader = () => {
+    setIsLoggedIn(false);
+    setActiveLink('home');
+    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.setItem('activeLink', 'home');
   };
 
   return (
@@ -53,7 +78,24 @@ const Header = () => {
           ABOUT US
         </Link>
       </div>
-      <button className="header__signup">Sign-up</button>
+
+      {/* Conditionally render the profile button with dropdown */}
+      {isLoggedIn ? (
+        <div className="header__profile-container">
+          <button className="header__profile" onClick={toggleDropdown}>P</button>
+          {isDropdownOpen && (
+            <div className="dropdown-menu">
+              <Link to="/manage" className="dropdown-item">Profile</Link>
+              <LogoutButton className= "dropdown-item" resetHeader={resetHeader} />
+            </div>
+          )}
+        </div>
+      ) : (
+        <Link to="/signup">
+          <button className="header__signup">Sign-up</button>
+        </Link>
+      )}
+
       <button className="header__hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         &#9776; {/* Hamburger icon */}
       </button>

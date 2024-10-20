@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import "../css/style.css";
+import React, { useEffect, useState } from 'react';
+import '../css/style.css';
 
 const EventPage = () => {
   const [events, setEvents] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch events from backend
   useEffect(() => {
@@ -12,18 +13,40 @@ const EventPage = () => {
       .catch((error) => console.error("Error fetching events:", error));
   }, []);
 
+  // Filter events based on the search query
+  const filteredEvents = events.filter((event) =>
+    event.event_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="event-page">
-      {events.map((event) => (
-        <div className="event-card" key={event._id}>
-          <img src={event.imageUrl} alt={event.name} className="event-image" />
-          <h3>{event.event_name}</h3>
-          <p>{event.description}</p>
-          <h4> Date : {event.date}</h4>
-          <h4>Time : {event.time}</h4>
-          <h4>Location : {event.address}</h4>
-        </div>
-      ))}
+    <div>
+      {/* Search Input */}
+      <div style={{ margin: '20px' }}>
+        <h1>Events </h1>
+        <input className='Search-bar'
+          type="text"
+          placeholder="Search events..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+           
+          }}
+        />
+      </div>
+      
+      {/* Event Cards */}
+      <div className="event-page">
+        {filteredEvents.map((event) => (
+          <div className="event-card" key={event._id}>
+            <img src={event.imageUrl} alt={event.event_name} className="event-image" />
+            <h3>{event.event_name}</h3>
+            <p>{event.description}</p>
+            <h4>Date: {event.date}</h4>
+            <h4>Time: {event.time}</h4>
+            <h4>Location: {event.address}</h4>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
