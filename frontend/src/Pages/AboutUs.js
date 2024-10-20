@@ -1,15 +1,13 @@
 import React from 'react';
 import '../css/about.css';
 import aboutImage1 from '../Assests/images/aboutus_1.jpg'; 
-//aboutus_1(Seniors connecting):-https://www.istockphoto.com/signature/photo/two-senior-men-discussing-on-park-bench-gm1289142883-384904012
 import aboutImage2 from '../Assests/images/aboutus_2.jpg'; 
-//aboutus_2(Seniors enjoying):- https://www.istockphoto.com/photo/theres-nothing-better-than-enjoying-a-bike-ride-together-gm684059538-125611075
 import aboutImage3 from '../Assests/images/aboutus_3.jpg'; 
-// aboutus_3(Caregiver working):- https://www.istockphoto.com/photo/mature-man-looking-at-a-digital-tablet-that-a-colleague-is-showing-at-work-gm1356386941-430573310
 
 const About = () => {
   return (
     <div className="about-container">
+    
       <section className="about-section">
         <h2>About Us</h2>
         <div className="about-content">
@@ -27,7 +25,7 @@ const About = () => {
       </section>
 
       <section className="how-it-works-section">
-        <h2>How IT Works</h2>
+        <h2>How It Works</h2>
         <div className="how-it-works-content">
           <img src={aboutImage3} alt="Caregiver working" className="about-image3" />
           <ul>
@@ -44,7 +42,7 @@ const About = () => {
         <h2>Contact Us</h2>
         <div className="map-container">
           <iframe
-            title="Store Location Map"
+            title="Office Location"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345091466!2d144.95373631568158!3d-37.81720997975161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0d7f7339%3A0xf42a3da3ef134ee5!2s123%20Caregiver%20St.%2C%20City%2C%20Country!5e0!3m2!1sen!2sus!4v1632538496152!5m2!1sen!2sus"
             width="355"
             height="350"
