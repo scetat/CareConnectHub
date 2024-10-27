@@ -37,7 +37,6 @@ const About = () => {
           </ul>
         </div>
       </section>
-
       <section className="contact-section">
         <h2>Contact Us</h2>
         <div className="map-container">
