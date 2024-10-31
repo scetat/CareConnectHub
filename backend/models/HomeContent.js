@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const HomeContentSchema = new mongoose.Schema({
+  role: { type: String, required: true },
   heroImage: { type: String, required: true },
   heroText: { type: String },
   iconA: { type: String, required: true },
