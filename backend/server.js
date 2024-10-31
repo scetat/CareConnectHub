@@ -7,6 +7,7 @@ const MongoStore = require("connect-mongo");
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
 const homeRoute = require("./routes/home");
+const profileRoute = require("./routes/profile");
 const path = require("path");
 
 const app = express();
@@ -55,6 +56,7 @@ mongoose
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/profile", profileRoute);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
 
