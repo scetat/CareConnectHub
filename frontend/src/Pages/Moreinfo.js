@@ -37,7 +37,7 @@ const Moreinfo = () => {
           <p>Experience: 5 years</p>
           <p>Qualification: PSW</p>
           <p>Hourly rate: $27</p>
-          <p>Availability: Weekdays 8am - 8pm</p>
+          <p>Availability: Weekends 8am - 4pm</p>
           <p>Rating: ★★★★☆</p>
         </div>
         <div className="card-buttons">
