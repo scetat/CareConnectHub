@@ -561,3 +561,62 @@
     margin-right: 5px; 
   }
 }
+
+
+/* Event Detail Page Styles */
+.event-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Event Image */
+.event-detail-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Event Title */
+.event-detail h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Event Information */
+.event-detail h4 {
+  font-size: 1.1em;
+  color: #555;
+  margin: 10px 0;
+}
+
+/* Event Description */
+.event-detail p {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 20px;
+  text-align: justify;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .event-detail h2 {
+    font-size: 1.5em;
+  }
+  
+  .event-detail h4 {
+    font-size: 1em;
+  }
+}
