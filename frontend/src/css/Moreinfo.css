@@ -1,0 +1,167 @@
+/* Card Container */
+.caregiver-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease;
+}
+
+
+@media (max-width: 768px) {
+    .caregiver-card {
+        padding: 15px;
+    }
+
+    .placeholder-image {
+        width: 250px;  
+        height: 250px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .caregiver-card {
+        padding: 10px;
+        width: 80%;
+    }
+
+    .placeholder-image {
+        width: 200px;  
+        height: 200px; 
+    }
+}
+
+/* Header Section */
+.card-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #00204A; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-initial {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-pic:hover {
+    background-color: #005792;
+}
+
+.profile-details {
+    margin-left: 15px;
+}
+
+.profile-details h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+.profile-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+/* Body Section */
+.card-body {
+    padding: 20px 0;
+}
+
+.placeholder-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    width: 300px; 
+    height: 300px; 
+    border-radius: 8px;
+    margin: 0 auto; 
+}
+
+.caregiver-main-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Footer Section */
+.card-footer {
+    padding-top: 10px;
+}
+
+.card-footer h4 {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+
+.info-content {
+    margin-bottom: 30px;
+}
+
+.card-footer p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Buttons */
+.card-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.cancel-button,
+.book-button {
+    border-width: 1px;
+    border-color: #00204A;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button {
+    background-color: white;
+    color: #00204A;
+    border: 1px solid #00204A; 
+}
+
+.cancel-button:hover {
+    background-color: #00406b;
+    color: white;
+}
+
+.book-button {
+    background-color: #00204A;
+    color: white;
+    border-radius: 50px; 
+    border: 1px solid #00204A; 
+}
+
+.book-button:hover {
+    background-color: #00406b; 
+}

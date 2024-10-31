@@ -1,7 +1,14 @@
 import React from 'react';
 import '../css/caregivermatch.css';
+import { useNavigate } from 'react-router-dom';
 
 const CaregiverMatch = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Function to handle button click
+  const handleMoreInfoClick = () => {
+    navigate('/moreinfo'); // Navigate to the More Info page
+  };
   return (
     <div className="caregiver-container">
       <header>
@@ -57,7 +64,7 @@ const CaregiverMatch = () => {
               <h3>John Doe</h3>
               <p><strong>Rating:</strong> ★★★★★</p>
               <p>Available: Weekdays</p>
-              <button>More info</button>
+              <button onClick={handleMoreInfoClick}>More info</button>
             </div>
           </div>
           <div className="result-card">
@@ -66,7 +73,7 @@ const CaregiverMatch = () => {
               <h3>John Doe</h3>
               <p><strong>Rating:</strong> ★★★★★</p>
               <p>Available: Weekdays</p>
-              <button>More info</button>
+              <button onClick={handleMoreInfoClick}>More info</button>
             </div>
           </div>
           </div>
