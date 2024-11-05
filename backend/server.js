@@ -7,6 +7,7 @@ const MongoStore = require("connect-mongo");
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
 const homeRoute = require("./routes/home");
+const caregiversRoute = require('./routes/caregiver');
 const profileRoute = require("./routes/profile");
 const path = require("path");
 
@@ -43,6 +44,8 @@ app.use((req, res, next) => {
 
 // MongoDB connection (using the second file's URI)
 mongoose
+
+  .connect("mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/", {
   .connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -59,6 +62,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoute);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
+app.use('/api/caregiver', caregiversRoute);
+
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));

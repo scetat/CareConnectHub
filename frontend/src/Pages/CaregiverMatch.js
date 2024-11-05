@@ -1,20 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/caregivermatch.css';
-import { useNavigate } from 'react-router-dom';
 
 const CaregiverMatch = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [allCaregivers, setAllCaregivers] = useState([]);
+  const [filteredCaregivers, setFilteredCaregivers] = useState([]);
+  const [experienceFilter, setExperienceFilter] = useState('');
+  const [ratingFilter, setRatingFilter] = useState('');
+  const [hourlyRateFilter, setHourlyRateFilter] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Function to handle button click
-  const handleMoreInfoClick = () => {
-    navigate('/moreinfo'); // Navigate to the More Info page
-  };
-  return (
+  // Fetch caregiver data from the backend
+  useEffect(() => {
+    const fetchCaregivers = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/caregiver');
+        const data = await response.json();
+
+        // Convert Decimal128 fields to regular numbers
+        const caregivers = data.data.map(caregiver => ({
+          ...caregiver,
+          Experience: parseFloat(caregiver.Experience.$numberDecimal || caregiver.Experience),
+          HourlyRate: parseFloat(caregiver.HourlyRate.$numberDecimal || caregiver.HourlyRate),
+          Rating: parseFloat(caregiver.Rating.$numberDecimal || caregiver.Rating),
+        }));
+
+        setAllCaregivers(caregivers);
+        setFilteredCaregivers(caregivers);
+      } catch (error) {
+        console.error("Error fetching caregiver data:", error);
+      }
+    };
+
+    fetchCaregivers();
+  }, []);
+
+  // Filter caregivers based on search and filters
+  useEffect(() => {
+    let result = allCaregivers;
+
+    // Apply filters
+    if (experienceFilter) {
+      result = result.filter(caregiver => parseFloat(caregiver.Experience) >= parseFloat(experienceFilter));
+    }
+    if (ratingFilter) {
+      result = result.filter(caregiver => parseFloat(caregiver.Rating) >= parseFloat(ratingFilter));
+    }
+    if (hourlyRateFilter) {
+      result = result.filter(caregiver => parseFloat(caregiver.HourlyRate) <= parseFloat(hourlyRateFilter));
+    }
+
+    // Apply search query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(caregiver =>
+        caregiver.UserID.FirstName.toLowerCase().includes(query) ||
+        caregiver.UserID.LastName.toLowerCase().includes(query)
+      );
+    }
+
+    setFilteredCaregivers(result);
+  }, [experienceFilter, ratingFilter, hourlyRateFilter, searchQuery, allCaregivers]);
+return (
     <div className="caregiver-container">
       <header>
         <h1>Caregiver Match</h1>
         <div className="search-bar">
-          <input type="text" placeholder="Search Caregivers..." />
+          <input
+            type="text"
+            placeholder="Search Caregivers..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
           <button className="search-btn">Search</button>
         </div>
       </header>
@@ -25,57 +81,59 @@ const CaregiverMatch = () => {
           <h2>Filter By</h2>
           <div className="filter-group">
             <label htmlFor="experience">Experience</label>
-            <select id="experience">
-              <option value="1-6">1-6 Years</option>
-              <option value="6-10">6-10 Years</option>
-              <option value="10+">10+ Years</option>
-            </select>
-          </div>
 
-          <div className="filter-group">
-            <label htmlFor="location">Location</label>
-            <input type="text" id="location" placeholder="Enter Zip Code" />
+            <select
+              id="experience"
+              value={experienceFilter}
+              onChange={(e) => setExperienceFilter(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="4">4+ Years</option>
+              <option value="5">5+ Years</option>
+
+            </select>
           </div>
 
           <div className="filter-group">
             <label htmlFor="rating">Rating</label>
-            <select id="rating">
-              <option value="4-star">4 Star</option>
-              <option value="5-star">5 Star</option>
+            <select
+              id="rating"
+              value={ratingFilter}
+              onChange={(e) => setRatingFilter(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="4">4+ Stars</option>
+              <option value="5">5+ Stars</option>
             </select>
           </div>
 
           <div className="filter-group">
-            <label htmlFor="availability">Availability</label>
-            <select id="availability">
-              <option value="weekdays">Weekdays</option>
-              <option value="weekends">Weekends</option>
-            </select>
+            <label htmlFor="hourlyRate">Hourly Rate (Max)</label>
+            <input
+              type="number"
+              id="hourlyRate"
+              value={hourlyRateFilter}
+              placeholder="e.g., 25"
+              onChange={(e) => setHourlyRateFilter(e.target.value)}
+            />
           </div>
         </div>
 
         {/* Results Section */}
         <div className="results-section">
           <h2>Results</h2>
-          <div class="card-container">
-          <div className="result-card">
-            <div className="result-image"></div>
-            <div className="result-info">
-              <h3>John Doe</h3>
-              <p><strong>Rating:</strong> ★★★★★</p>
-              <p>Available: Weekdays</p>
-              <button onClick={handleMoreInfoClick}>More info</button>
-            </div>
-          </div>
-          <div className="result-card">
-            <div className="result-image"></div>
-            <div className="result-info">
-              <h3>John Doe</h3>
-              <p><strong>Rating:</strong> ★★★★★</p>
-              <p>Available: Weekdays</p>
-              <button onClick={handleMoreInfoClick}>More info</button>
-            </div>
-          </div>
+          <div className="card-container">
+            {filteredCaregivers.map(caregiver => (
+              <div key={caregiver.UserID._id} className="result-card">
+                <div className="result-info">
+                  <h3>{caregiver.UserID.FirstName} {caregiver.UserID.LastName}</h3>
+                  <p><strong>Experience:</strong> {caregiver.Experience} years</p>
+                  <p><strong>Rating:</strong> {caregiver.Rating} ★</p>
+                  <p><strong>Hourly Rate:</strong> ${caregiver.HourlyRate}</p>
+                  <button>More info</button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

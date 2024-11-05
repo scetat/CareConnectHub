@@ -24,7 +24,6 @@ const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
-      console.log("data is ", data);
       // Store login status in localStorage
       localStorage.setItem("isLoggedIn", data.user.isLoggedIn);
       localStorage.setItem("user", JSON.stringify(data.user));

@@ -38,3 +38,4 @@ const LogoutButton = ({ resetHeader }) => {
 };
 
 export default LogoutButton;
+

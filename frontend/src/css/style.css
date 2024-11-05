@@ -435,6 +435,9 @@
   border: '1px solid #ddd';
 }
 
+.header__profile-container {
+  position: relative; /* Container for the profile button and dropdown */
+
 .Search-bar {
   padding: 6px;         
   width: 30%;         
@@ -488,6 +491,7 @@
 /* Dropdown Menu Styles */
 .dropdown-menu {
   position: absolute;
+
   top: 100%;
   right: 0;
   background-color: white;
