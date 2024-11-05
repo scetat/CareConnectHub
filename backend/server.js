@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
 const homeRoute = require("./routes/home");
+const caregiversRoute = require('./routes/caregiver');
 const path = require("path");
 
 const app = express();
@@ -22,7 +23,7 @@ app.use((req, res, next) => {
 
 // MongoDB connection (using the second file's URI)
 mongoose
-  .connect("mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/", {
+  .connect("mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -37,6 +38,8 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
+app.use('/api/caregiver', caregiversRoute);
+
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));
