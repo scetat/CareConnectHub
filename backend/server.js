@@ -14,7 +14,7 @@ const path = require("path");
 const app = express();
 
 const mongoUrl =
-  "mongodb+srv://ogbunnamdi:cerberus@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/";
 
 // Middleware to handle JSON requests
 app.use(express.json());
@@ -42,10 +42,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// MongoDB connection (using the second file's URI)
+// MongoDB connection
 mongoose
-
-  .connect("mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/", {
   .connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -63,7 +61,6 @@ app.use("/api/profile", profileRoute);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
 app.use('/api/caregiver', caregiversRoute);
-
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));

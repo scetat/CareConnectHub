@@ -437,6 +437,7 @@
 
 .header__profile-container {
   position: relative; /* Container for the profile button and dropdown */
+}
 
 .Search-bar {
   padding: 6px;         

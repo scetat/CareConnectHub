@@ -10,7 +10,6 @@ import About from "./Pages/AboutUs";
 import Login from "./Pages/Login";
 import EventPage from "./Pages/EventPage";
 import ManageProfile from "./Pages/ManageProfile";
-import Login from "./Pages/Login";
 import EventDetail from './components/EventDetail';
 import Moreinfo from "./Pages/Moreinfo";
 
@@ -19,7 +18,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" exact={true} element={<Home />} />
+        <Route path="/" exact={true} element={<Login />} />
 
         <Route path="/home" exact={true} element={<Home />} />
         <Route path="/caregiver" exact={true} element={<CaregiverMatch />} />
