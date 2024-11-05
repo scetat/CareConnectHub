@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/manageProfile.css";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
@@ -16,22 +16,56 @@ const ManageProfile = () => {
     email: "",
     address: "",
     phone: "",
+    role: "",
   });
+  const [caregiverData, setCaregiverData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [caregiverData, setCaregiverData] = useState({
-    experience: "",
-    hourlyRate: "",
-    qualifications: "",
-    availability: {
-      Monday: { start: "", end: "" },
-      Tuesday: { start: "", end: "" },
-      Wednesday: { start: "", end: "" },
-      Thursday: { start: "", end: "" },
-      Friday: { start: "", end: "" },
-      Saturday: { start: "", end: "" },
-      Sunday: { start: "", end: "" },
-    },
-  });
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/profile", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.message || "Error fetching profile data");
+        }
+
+        const data = await response.json();
+
+        // Set user data and caregiver data (if available) in state
+        setUserData({
+          email: data.email,
+          address: data.address,
+          phone: data.phone,
+          role: data.role,
+        });
+
+        if (data.role === "Caregiver") {
+          setCaregiverData({
+            experience: data.caregiverData.experience,
+            hourlyRate: data.caregiverData.hourlyRate,
+            qualifications: data.caregiverData.qualifications,
+            availability: data.caregiverData.availability,
+          });
+        }
+
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
 
   const handleUserDataChange = (field) => (e) => {
     setUserData({ ...userData, [field]: e.target.value });
@@ -52,6 +86,9 @@ const ManageProfile = () => {
   };
 
   const qualificationOptions = ["CNA", "LPN", "RN", "Home Health Aide", "Personal Care Assistant"];
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="manage-profile">
@@ -83,46 +120,49 @@ const ManageProfile = () => {
         </form>
       </ProfileSection>
 
-      <ProfileSection title="Caregiver Information">
-        <form>
-          <InputField
-            label="Experience (years)"
-            type="number"
-            value={caregiverData.experience}
-            onChange={handleCaregiverDataChange("experience")}
-          />
-          <InputField
-            label="Hourly Rate ($)"
-            type="number"
-            value={caregiverData.hourlyRate}
-            onChange={handleCaregiverDataChange("hourlyRate")}
-          />
-          <SelectField
-            label="Qualifications"
-            options={qualificationOptions}
-            value={caregiverData.qualifications}
-            onChange={handleCaregiverDataChange("qualifications")}
-          />
+      {/* Conditionally render the Caregiver Information section if the user is a caregiver */}
+      {userData.role === "Caregiver" && caregiverData && (
+        <ProfileSection title="Caregiver Information">
+          <form>
+            <InputField
+              label="Experience (years)"
+              type="number"
+              value={caregiverData.experience}
+              onChange={handleCaregiverDataChange("experience")}
+            />
+            <InputField
+              label="Hourly Rate ($)"
+              type="number"
+              value={caregiverData.hourlyRate}
+              onChange={handleCaregiverDataChange("hourlyRate")}
+            />
+            <SelectField
+              label="Qualifications"
+              options={qualificationOptions}
+              value={caregiverData.qualifications}
+              onChange={handleCaregiverDataChange("qualifications")}
+            />
 
-          <div className="availability-section">
-            <h3>Availability</h3>
-            {Object.entries(caregiverData.availability).map(([day, times]) => (
-              <DayAvailability
-                key={day}
-                day={day}
-                start={times.start}
-                end={times.end}
-                onStartChange={handleAvailabilityChange(day, "start")}
-                onEndChange={handleAvailabilityChange(day, "end")}
-              />
-            ))}
-          </div>
+            <div className="availability-section">
+              <h3>Availability</h3>
+              {caregiverData.availability.map((day) => (
+                <DayAvailability
+                  key={day.dayOfWeek}
+                  day={day.dayOfWeek}
+                  start={day.startTime}
+                  end={day.endTime}
+                  onStartChange={handleAvailabilityChange(day.dayOfWeek, "start")}
+                  onEndChange={handleAvailabilityChange(day.dayOfWeek, "end")}
+                />
+              ))}
+            </div>
 
-          <button type="submit" className="submit-button">
-            Update Caregiver Information
-          </button>
-        </form>
-      </ProfileSection>
+            <button type="submit" className="submit-button">
+              Update Caregiver Information
+            </button>
+          </form>
+        </ProfileSection>
+      )}
     </div>
   );
 };

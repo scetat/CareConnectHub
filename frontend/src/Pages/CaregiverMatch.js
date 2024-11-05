@@ -60,8 +60,7 @@ const CaregiverMatch = () => {
 
     setFilteredCaregivers(result);
   }, [experienceFilter, ratingFilter, hourlyRateFilter, searchQuery, allCaregivers]);
-
-  return (
+return (
     <div className="caregiver-container">
       <header>
         <h1>Caregiver Match</h1>
@@ -82,6 +81,7 @@ const CaregiverMatch = () => {
           <h2>Filter By</h2>
           <div className="filter-group">
             <label htmlFor="experience">Experience</label>
+
             <select
               id="experience"
               value={experienceFilter}
@@ -90,6 +90,7 @@ const CaregiverMatch = () => {
               <option value="">All</option>
               <option value="4">4+ Years</option>
               <option value="5">5+ Years</option>
+
             </select>
           </div>
 
