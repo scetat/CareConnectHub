@@ -1,31 +1,37 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Moreinfo.css';
-import { useNavigate } from 'react-router-dom';
 
 const Moreinfo = () => {
-  //Found First letter of name
-  const getInitial = (name) => name.charAt(0);
-
+  const location = useLocation();
   const navigate = useNavigate();
+  const caregiver = location.state?.caregiver;
+
+  if (!caregiver) {
+    return <p>No caregiver information available.</p>;
+  }
+
+  const getInitial = (name) => name.charAt(0);
 
   const handleCancelClick = () => {
     navigate('/caregiver');
   };
+
   return (
     <div className="caregiver-card">
       <div className="card-header">
         <div className="profile-pic">
-          <span className="profile-initial">{getInitial("John Doe")}</span>
+          <span className="profile-initial">{getInitial(caregiver.UserID.FirstName)}</span>
         </div>
         <div className="profile-details">
-          <h3>John Doe</h3>
+          <h3>{caregiver.UserID.FirstName} {caregiver.UserID.LastName}</h3>
           <p>Senior Caregiver</p>
         </div>
       </div>
       <div className="card-body">
         <div className="placeholder-image">
           <img
-            src=""//Image URL
+            src={caregiver.profileImage || ""} // Add image URL from caregiver data if available
             alt="Caregiver"
             className="caregiver-main-photo"
           />
@@ -34,14 +40,14 @@ const Moreinfo = () => {
       <div className="card-footer">
         <h4>Information</h4>
         <div className="info-content">
-          <p>Experience: 5 years</p>
-          <p>Qualification: PSW</p>
-          <p>Hourly rate: $27</p>
-          <p>Availability: Weekends 8am - 4pm</p>
-          <p>Rating: ★★★★☆</p>
+          <p>Experience: {caregiver.Experience} years</p>
+          <p>Qualification: {caregiver.Qualification || "N/A"}</p>
+          <p>Hourly rate: ${caregiver.HourlyRate}</p>
+          <p>Availability: {caregiver.Availability || "N/A"}</p>
+          <p>Rating: {"★".repeat(Math.round(caregiver.Rating))}</p>
         </div>
         <div className="card-buttons">
-        <button className="cancel-button" onClick={handleCancelClick}>Cancel</button>
+          <button className="cancel-button" onClick={handleCancelClick}>Cancel</button>
           <button className="book-button">Book Appointment</button>
         </div>
       </div>

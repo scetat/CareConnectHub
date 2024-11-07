@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/caregivermatch.css';
 
 const CaregiverMatch = () => {
@@ -8,15 +9,13 @@ const CaregiverMatch = () => {
   const [ratingFilter, setRatingFilter] = useState('');
   const [hourlyRateFilter, setHourlyRateFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
-  // Fetch caregiver data from the backend
   useEffect(() => {
     const fetchCaregivers = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/caregiver');
         const data = await response.json();
-
-        // Convert Decimal128 fields to regular numbers
         const caregivers = data.data.map(caregiver => ({
           ...caregiver,
           Experience: parseFloat(caregiver.Experience.$numberDecimal || caregiver.Experience),
@@ -34,11 +33,9 @@ const CaregiverMatch = () => {
     fetchCaregivers();
   }, []);
 
-  // Filter caregivers based on search and filters
   useEffect(() => {
     let result = allCaregivers;
 
-    // Apply filters
     if (experienceFilter) {
       result = result.filter(caregiver => parseFloat(caregiver.Experience) >= parseFloat(experienceFilter));
     }
@@ -49,7 +46,6 @@ const CaregiverMatch = () => {
       result = result.filter(caregiver => parseFloat(caregiver.HourlyRate) <= parseFloat(hourlyRateFilter));
     }
 
-    // Apply search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       result = result.filter(caregiver =>
@@ -60,7 +56,12 @@ const CaregiverMatch = () => {
 
     setFilteredCaregivers(result);
   }, [experienceFilter, ratingFilter, hourlyRateFilter, searchQuery, allCaregivers]);
-return (
+
+  const handleMoreInfoClick = (caregiver) => {
+    navigate('/moreinfo', { state: { caregiver } });
+  };
+
+  return (
     <div className="caregiver-container">
       <header>
         <h1>Caregiver Match</h1>
@@ -76,12 +77,10 @@ return (
       </header>
 
       <div className="filter-results-container">
-        {/* Filter Section */}
         <div className="filter-section">
           <h2>Filter By</h2>
           <div className="filter-group">
             <label htmlFor="experience">Experience</label>
-
             <select
               id="experience"
               value={experienceFilter}
@@ -90,10 +89,8 @@ return (
               <option value="">All</option>
               <option value="4">4+ Years</option>
               <option value="5">5+ Years</option>
-
             </select>
           </div>
-
           <div className="filter-group">
             <label htmlFor="rating">Rating</label>
             <select
@@ -106,7 +103,6 @@ return (
               <option value="5">5+ Stars</option>
             </select>
           </div>
-
           <div className="filter-group">
             <label htmlFor="hourlyRate">Hourly Rate (Max)</label>
             <input
@@ -119,7 +115,6 @@ return (
           </div>
         </div>
 
-        {/* Results Section */}
         <div className="results-section">
           <h2>Results</h2>
           <div className="card-container">
@@ -130,7 +125,7 @@ return (
                   <p><strong>Experience:</strong> {caregiver.Experience} years</p>
                   <p><strong>Rating:</strong> {caregiver.Rating} ★</p>
                   <p><strong>Hourly Rate:</strong> ${caregiver.HourlyRate}</p>
-                  <button>More info</button>
+                  <button onClick={() => handleMoreInfoClick(caregiver)}>More info</button>
                 </div>
               </div>
             ))}
