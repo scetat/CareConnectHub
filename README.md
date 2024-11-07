@@ -1,6 +1,6 @@
 # Connect Hub
 
-*Connect Hub* is a portal designed to connect caretakers and caregivers, making it easier for caretakers to find and book caregivers in their local area. The platform allows caretakers to:
+**Connect Hub** is a portal designed to connect caretakers and caregivers, making it easier for caretakers to find and book caregivers in their local area. The platform allows caretakers to:
 
 - Browse available caregivers
 - View caregiver profiles
@@ -21,6 +21,7 @@ The platform streamlines the process of finding care services, enabling users to
   - [Frontend Setup](#frontend-setup)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
+  
 
 ## Features
 
@@ -33,7 +34,7 @@ The platform streamlines the process of finding care services, enabling users to
 
 This repository contains separate directories for the frontend and backend. To run the application locally, you need to run both in separate terminal instances.
 
-*Prerequisites:*
+**Prerequisites:**
 
 - Ensure you have [Node.js](https://nodejs.org/) installed.
 - You need a MongoDB connection string (can be obtained from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)).
@@ -42,64 +43,64 @@ This repository contains separate directories for the frontend and backend. To r
 
 1. From the root folder, open a terminal and navigate to the backend directory:
 
-   bash
+   ```bash
    cd backend
-   
+   ```
 
 2. Install all backend dependencies:
 
-   bash
+   ```bash
    npm install
-   
+   ```
 
-3. *(Optional) First-Time Setup:*
+3. **(Optional) First-Time Setup:**
 
-   - In your editor, open backend/server.js and replace the connection string on line 24 with your MongoDB connection string.
-   - Open backend/seeders/seedHomeContent.js and replace the MongoDB connection string on line 4 with your own.
+   - In your editor, open `backend/server.js` and replace the connection string on line 24 with your MongoDB connection string.
+   - Open `backend/seeders/seedHomeContent.js` and replace the MongoDB connection string on line 4 with your own.
 
    To populate the database with initial content for the home page, run the following command in your terminal:
 
-   bash
+   ```bash
    node seeders/seedHomeContent.js
-   
+   ```
 
 4. Start the backend server:
-   bash
+   ```bash
    npm start
-   
+   ```
 
 ### Frontend Setup
 
 1. In a new terminal, navigate to the frontend directory:
 
-   bash
+   ```bash
    cd frontend
-   
+   ```
 
 2. Install all frontend dependencies:
 
-   bash
+   ```bash
    npm install
-   
+   ```
 
 3. Start the frontend application:
-   bash
+   ```bash
    npm start
-   
+   ```
 
 Once both frontend and backend servers are running, you can access the application in your browser.
 
 ## Technologies Used
 
-- *Frontend:*
+- **Frontend:**
   - React
   - CSS/SCSS
-- *Backend:*
+- **Backend:**
   - Node.js
   - Express.js
   - MongoDB
 
----
+
 
 Thank you!  
-*Connect Hub Team*
+**Connect Hub Team**

@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../css/signup.css'; 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "../css/signup.css";
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    houseNo: '',
-    street: '',
-    city: '',
-    zipCode: '',
-    province: '',
-    stateName: '', 
-    countryName: '', 
-    roleName: 'Caretaker', 
-    password: '',
-    confirmPassword: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    houseNo: "",
+    street: "",
+    city: "",
+    zipCode: "",
+    province: "",
+    stateName: "",
+    countryName: "",
+    roleName: "Caretaker",
+    password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ export default function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('Form Data:', formData); 
+    console.log("Form Data:", formData);
 
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
@@ -39,42 +39,42 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/signup', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
-      console.log('Response from server:', data);
+      console.log("Response from server:", data);
 
       if (response.ok) {
-        alert('User registered successfully!');
+        alert("User registered successfully!");
         //Redirection for future use.
         setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          houseNo: '',
-          street: '',
-          city: '',
-          zipCode: '',
-          province: '',
-          stateName: '',
-          countryName: '',
-          roleName: 'Caretaker',
-          password: '',
-          confirmPassword: '',
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          houseNo: "",
+          street: "",
+          city: "",
+          zipCode: "",
+          province: "",
+          stateName: "",
+          countryName: "",
+          roleName: "Caretaker",
+          password: "",
+          confirmPassword: "",
         });
       } else {
-        alert(data.message || 'An error occurred during signup');
+        alert(data.message || "An error occurred during signup");
       }
     } catch (error) {
-      console.error('Error during form submission:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error during form submission:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
@@ -86,7 +86,6 @@ export default function SignUpPage() {
         </div>
       </h1>
       <form onSubmit={handleSubmit}>
-      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
@@ -114,7 +113,6 @@ export default function SignUpPage() {
           </div>
         </div>
 
-      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -142,7 +140,6 @@ export default function SignUpPage() {
           </div>
         </div>
 
-      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="houseNo">House No.</label>
@@ -209,7 +206,6 @@ export default function SignUpPage() {
           </div>
         </div>
 
-       
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="stateName">State</label>
@@ -237,24 +233,16 @@ export default function SignUpPage() {
           </div>
         </div>
 
-      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="roleName">Role Name</label>
-            <select
-              id="roleName"
-              name="roleName"
-              value={formData.roleName}
-              onChange={handleChange}
-              required
-            >
+            <select id="roleName" name="roleName" value={formData.roleName} onChange={handleChange} required>
               <option value="Caretaker">Caretaker</option>
               <option value="Caregiver">Caregiver</option>
             </select>
           </div>
         </div>
 
-      
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="password">Password</label>
@@ -280,13 +268,13 @@ export default function SignUpPage() {
           </div>
         </div>
 
-      
-        <button type="submit" className="sign-up-button">Sign Up</button>
+        <button type="submit" className="sign-up-button">
+          Sign Up
+        </button>
       </form>
       <p className="login-link">
         Already Have an Account? <Link to="/login">Sign In</Link>
       </p>
-
     </div>
   );
 }
