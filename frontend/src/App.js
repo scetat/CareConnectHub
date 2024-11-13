@@ -12,6 +12,7 @@ import EventPage from "./Pages/EventPage";
 import ManageProfile from "./Pages/ManageProfile";
 import EventDetail from './components/EventDetail';
 import Moreinfo from "./Pages/Moreinfo";
+import Appointment from "./Pages/Appointment";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/manage" element={<ManageProfile />} />
         <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/moreinfo" element={<Moreinfo />} />
+        <Route path="/appointment" element={<Appointment />} />
       </Routes>
       <Footer />
     </BrowserRouter>

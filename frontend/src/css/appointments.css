@@ -1,0 +1,56 @@
+.appointments-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .appointments-container h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .appointments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .appointment-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .appointment-date {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .appointment-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .view-button {
+    align-self: flex-start;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .view-button:hover {
+    background-color: #0056b3;
+  }
+  
