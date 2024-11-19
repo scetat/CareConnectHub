@@ -7,11 +7,12 @@ import "./index.css";
 import CaregiverHome from "./Pages/CaregiverHome";
 import CaregiverMatch from "./Pages/CaregiverMatch";
 import About from "./Pages/AboutUs";
+import Login from "./Pages/Login";
 import EventPage from "./Pages/EventPage";
 import ManageProfile from "./Pages/ManageProfile";
-import Login from "./Pages/Login";
 import EventDetail from './components/EventDetail';
 import Moreinfo from "./Pages/Moreinfo";
+import AppointmentPage from "./Pages/AppointmentPage";
 
 function App() {
   return (
@@ -23,12 +24,13 @@ function App() {
         <Route path="/home" exact={true} element={<Home />} />
         <Route path="/caregiver" exact={true} element={<CaregiverMatch />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/about" exact={true} element={<About />} />
+        <Route path="/login" exact={true} element={<Login />} />
         <Route path="/events" element={<EventPage />} />
         <Route path="/manage" element={<ManageProfile />} />
         <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/moreinfo" element={<Moreinfo />} />
+        <Route path="/AppointmentPage" element={<AppointmentPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
