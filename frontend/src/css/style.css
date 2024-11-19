@@ -38,13 +38,68 @@
   border-radius: 5px;
 }
 
-/* Hamburger Menu Styles */
+/* Profile Dropdown */
+.header__profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 0; 
+}
+
+.header__profile {
+  cursor: pointer;
+  background: grey;
+  border: none;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 150px;
+  margin-top: 5px;
+  padding: 10px 0;
+  border-radius: 4px;
+}
+
+.dropdown-item,
+.header__logout {
+  display: block;
+  color: #000;
+  font-size: 1em;
+  padding: 8px 12px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.dropdown-item:hover,
+.header__logout:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hamburger Menu */
 .header__hamburger {
-  display: none; /* Hide by default */
+  display: none;
   font-size: 24px;
   background: none;
   border: none;
   cursor: pointer;
+  margin-right: 0; 
 }
 
 /* Media Queries for Responsiveness */
@@ -214,7 +269,7 @@
   }
 
   .footer__logo img {
-    width: 100px; /* Adjusting to smaller logo */
+    width: 100px; 
     height: auto;
     margin-bottom: 10px;
   }
@@ -301,7 +356,7 @@
 
 
 
-/* Styling the event page container */
+
 .event-page {
   display: flex;
   flex-wrap: wrap;
@@ -309,7 +364,6 @@
   padding: 20px;
 }
 
-/* Styling individual event cards */
 .event-card {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -322,12 +376,11 @@
   transition: transform 0.3s ease;
 }
 
-/* Card hover effect */
 .event-card:hover {
   transform: translateY(-10px);
 }
 
-/* Styling the event image */
+
 .event-image {
   width: 100%;
   height: 200px;
@@ -335,21 +388,20 @@
   border-radius: 10px;
 }
 
-/* Styling the event name */
+
 .event-card h3 {
   font-size: 1.5em;
   color: #333;
   margin: 15px 0;
 }
 
-/* Styling the event description */
+
 .event-card p {
   font-size: 1em;
   color: #666;
   margin: 10px 0 20px;
 }
 
-/* Styling the More Info button */
 .event-card button {
   background-color: #007bff;
   color: white;
@@ -376,9 +428,51 @@
   }
 }
 
+.Search-bar{
+  padding: '10px';
+  width: '300px';
+  border-radius: 5px;
+  border: '1px solid #ddd';
+}
 
 .header__profile-container {
   position: relative; /* Container for the profile button and dropdown */
+
+.Search-bar {
+  padding: 6px;         
+  width: 30%;         
+  font-size: 14px;      
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 35%;
+}
+
+@media (max-width: 768px) {
+  .Search-bar {
+    width: 150px;     
+  }
+}
+
+@media (max-width: 480px) {
+  .Search-bar {
+    width: 120px;      
+  }
+}
+
+.header__nav,
+.header__profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo img {
+  width: 100px;
+}
+
+/* Remove extra margin and padding */
+.header__profile-container {
+  position: relative;
+  margin-right: 0;  
 }
 
 .header__profile {
@@ -394,33 +488,139 @@
   border-radius: 50%;
 }
 
+/* Dropdown Menu Styles */
 .dropdown-menu {
   position: absolute;
-  top: 100%; 
+
+  top: 100%;
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   min-width: 150px;
   margin-top: 5px;
-  padding: 10px 0; 
+  padding: 10px 0;
+  border-radius: 4px;
 }
 
-.dropdown-item {
+.dropdown-item,
+.header__logout {
   display: block;
-  padding: 10px;
-  color: black;
+  color: #000;
+  font-size: 1em;
+  padding: 8px 12px;
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,
+.header__logout:hover {
   background-color: #f0f0f0;
 }
 
-.Search-bar{
-  padding: '10px';
-  width: '300px';
-  border-radius: 5px;
-  border: '1px solid #ddd';
+/* Hamburger Menu */
+.header__hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 0; 
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #99aabc;
+  color: #333;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .header__nav {
+    display: none;
+  }
+
+  .header__hamburger {
+    display: block;
+    color: #254a73;
+    margin-right: 0;  
+  }
+
+
+  .header__profile-container {
+    margin-left: auto;
+  }
+
+  .header__profile {
+    margin-right: 5px; 
+  }
+}
+
+
+/* Event Detail Page Styles */
+.event-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Event Image */
+.event-detail-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Event Title */
+.event-detail h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Event Information */
+.event-detail h4 {
+  font-size: 1.1em;
+  color: #555;
+  margin: 10px 0;
+}
+
+/* Event Description */
+.event-detail p {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.6;
+  margin-top: 20px;
+  text-align: justify;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .event-detail h2 {
+    font-size: 1.5em;
+  }
+  
+  .event-detail h4 {
+    font-size: 1em;
+  }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../css/style.css';
 
 const EventPage = () => {
@@ -22,15 +23,13 @@ const EventPage = () => {
     <div>
       {/* Search Input */}
       <div style={{ margin: '20px' }}>
-        <h1>Events </h1>
-        <input className='Search-bar'
+        <h1>Events</h1>
+        <input
+          className='Search-bar'
           type="text"
           placeholder="Search events..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{
-           
-          }}
         />
       </div>
       
@@ -40,10 +39,11 @@ const EventPage = () => {
           <div className="event-card" key={event._id}>
             <img src={event.imageUrl} alt={event.event_name} className="event-image" />
             <h3>{event.event_name}</h3>
-            <p>{event.description}</p>
-            <h4>Date: {event.date}</h4>
-            <h4>Time: {event.time}</h4>
-            <h4>Location: {event.address}</h4>
+            <p>{event.description.slice(0, 100)}...</p> {/* Show first 150 characters of description */}
+            {/* Link to Event Detail Page */}
+            <Link to={`/event/${event._id}`}>
+              <button className="more-details-button">More Details</button>
+            </Link>
           </div>
         ))}
       </div>

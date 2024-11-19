@@ -86,7 +86,7 @@ const Header = () => {
           {isDropdownOpen && (
             <div className="dropdown-menu">
               <Link to="/manage" className="dropdown-item">Profile</Link>
-              <LogoutButton className= "dropdown-item" resetHeader={resetHeader} />
+              <LogoutButton resetHeader={resetHeader} />
             </div>
           )}
         </div>

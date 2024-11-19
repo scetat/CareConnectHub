@@ -14,6 +14,7 @@ const Login = () => {
 
     const response = await fetch("http://localhost:8000/api/auth/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,6 +24,10 @@ const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
+      // Store login status in localStorage
+      localStorage.setItem("isLoggedIn", data.user.isLoggedIn);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
       navigate("/");
     } else {
       setError(data.message);
