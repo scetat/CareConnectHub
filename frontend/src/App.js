@@ -10,7 +10,6 @@ import About from "./Pages/AboutUs";
 import Login from "./Pages/Login";
 import EventPage from "./Pages/EventPage";
 import ManageProfile from "./Pages/ManageProfile";
-import Login from "./Pages/Login";
 import EventDetail from './components/EventDetail';
 import Moreinfo from "./Pages/Moreinfo";
 
