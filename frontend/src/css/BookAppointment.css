@@ -1,0 +1,135 @@
+/* Basic container styling */
+.appointment-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  /* Caregiver info section */
+  .caregiver-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .caregiver-info .profile-initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .caregiver-info h2 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .caregiver-info p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Appointment form styling */
+  .appointment-form h3 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+  }
+  
+  .appointment-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 500;
+  }
+  
+  .appointment-form input,
+  .appointment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .appointment-form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  /* Terms section */
+  .terms {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .terms input {
+    margin-right: 10px;
+  }
+  
+  .terms a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .terms a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Confirm button */
+  .confirm-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #003366;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirm-button:hover {
+    background-color: #002244;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .appointment-container {
+      padding: 15px;
+    }
+  
+    .appointment-form h3 {
+      font-size: 1.2rem;
+    }
+  
+    .confirm-button {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .caregiver-info h2 {
+      font-size: 1rem;
+    }
+  
+    .appointment-form h3 {
+      font-size: 1.1rem;
+    }
+  
+    .confirm-button {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  }
+  

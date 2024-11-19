@@ -2,38 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
 const homeRoute = require("./routes/home");
-const caregiversRoute = require('./routes/caregiver');
-const profileRoute = require("./routes/profile");
 const path = require("path");
 
 const app = express();
 
-const mongoUrl =
-  "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/";
-
 // Middleware to handle JSON requests
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
-app.use(
-  session({
-    name: "careconnectsession",
-    secret: "careconnectsecret",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl }),
-    cookie: { secure: false, sameSite: "lax", httpOnly: true, maxAge: 1000 * 60 * 60 * 24 }, // 1 day
-  })
-);
+app.use(cors());
 app.use(bodyParser.json());
 
 // Log incoming requests for debugging
@@ -42,9 +20,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// MongoDB connection
+// MongoDB connection (using the second file's URI)
 mongoose
-  .connect(mongoUrl, {
+  .connect("mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -57,10 +35,8 @@ mongoose
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/profile", profileRoute);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
-app.use('/api/caregiver', caregiversRoute);
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));
