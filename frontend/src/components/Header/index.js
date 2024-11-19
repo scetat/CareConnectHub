@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import '../../css/style.css';
 import { Link } from 'react-router-dom';
 import LogoutButton from '../Logout/logout';
@@ -45,7 +45,7 @@ const Header = () => {
         <Link
           to="/home"
           className={`header__link ${activeLink === 'home' ? 'header__link--active' : ''}`}
-          onClick={() => handleLinkClick('home')}
+          onClick={() => handleLinkClick('Home')}
         >
           HOME
         </Link>
@@ -62,6 +62,13 @@ const Header = () => {
           onClick={() => handleLinkClick('caregiver')}
         >
           CAREGIVER
+        </Link>
+        <Link
+          to="/booking"
+          className={`header__link ${activeLink === 'booking' ? 'header__link--active' : ''}`}
+          onClick={() => handleLinkClick('booking')}
+        >
+          BOOKING
         </Link>
         <Link
           to="/about"
@@ -90,7 +97,7 @@ const Header = () => {
       )}
 
       <button className="header__hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        &#9776;
+        &#9776; {/* Hamburger icon */}
       </button>
     </header>
   );

@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" exact={true} element={<Home />} />
+        <Route path="/" exact={true} element={<Login />} />
 
         <Route path="/home" exact={true} element={<Home />} />
         <Route path="/caregiver" exact={true} element={<CaregiverMatch />} />
