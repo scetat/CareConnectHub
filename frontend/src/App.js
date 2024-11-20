@@ -13,6 +13,7 @@ import ManageProfile from "./Pages/ManageProfile";
 import EventDetail from './components/EventDetail';
 import Moreinfo from "./Pages/Moreinfo";
 import AppointmentPage from "./Pages/AppointmentPage";
+import Appointment from "./Pages/Appointment";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/moreinfo" element={<Moreinfo />} />
         <Route path="/AppointmentPage" element={<AppointmentPage />} />
+        <Route path="/Appointment" element={<Appointment />} />
       </Routes>
       <Footer />
     </BrowserRouter>
