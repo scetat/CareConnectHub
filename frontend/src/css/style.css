@@ -413,7 +413,7 @@
 }
 
 .event-card button:hover {
-  background-color: #074c97;
+  background-color: #0056b3;
 }
 
 /* Mobile responsiveness */
@@ -438,6 +438,7 @@
 .header__profile-container {
   position: relative; /* Container for the profile button and dropdown */
 }
+
 
 .Search-bar {
   padding: 6px;         
