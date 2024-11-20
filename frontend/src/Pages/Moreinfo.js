@@ -17,6 +17,10 @@ const Moreinfo = () => {
     navigate('/caregiver');
   };
 
+  const handleBookAppointmentClick = () => {
+    navigate('/AppointmentPage', { state: { caregiver } });
+  };
+
   return (
     <div className="caregiver-card">
       <div className="card-header">
@@ -48,7 +52,7 @@ const Moreinfo = () => {
         </div>
         <div className="card-buttons">
           <button className="cancel-button" onClick={handleCancelClick}>Cancel</button>
-          <button className="book-button">Book Appointment</button>
+          <button className="book-button" onClick={handleBookAppointmentClick}>Book Appointment</button>
         </div>
       </div>
     </div>
