@@ -5,19 +5,19 @@ const Appointments = () => {
   const appointments = [
     {
       date: "21st September, 2024",
-      caregiverName: "ABCD",
+      caregiverName: "John Ogbu",
       time: "8:00am to 10:00am",
       address: "41 Guelph Ave, Kitchener N2A 7K8, ON"
     },
     {
       date: "30th September, 2024",
-      caregiverName: "ABCD",
+      caregiverName: "Ruhi Dart",
       time: "12:00pm to 2:00pm",
       address: "78 Queen Street, Waterloo N3R 9K8, ON"
     },
     {
       date: "31st September, 2024",
-      caregiverName: "ABCD",
+      caregiverName: "Monika George",
       time: "4:00pm to 6:00pm",
       address: "452 Jenkin Blvd, Cambridge N2I 9U4, ON"
     }
