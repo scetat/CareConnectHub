@@ -5,10 +5,13 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const homeContent = await HomeContent.findOne();
+    console.log("role is ", req.query.role);
+    const role = req.query.role === "guest" ? "Caretaker" : req.query.role;
+    const homeContent = await HomeContent.findOne({ role });
     if (!homeContent) {
       return res.status(404).json({ message: "Home content not found" });
     }
+
     res.json(homeContent);
   } catch (error) {
     console.error("Error fetching home content:", error);

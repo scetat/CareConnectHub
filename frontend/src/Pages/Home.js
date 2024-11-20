@@ -10,26 +10,40 @@ const Home = () => {
 
   useEffect(() => {
     const fetchHomeContent = async () => {
-      const cachedContent = localStorage.getItem("homeContent");
-      const cachedTimestamp = localStorage.getItem("homeContentTimestamp");
+      const user = JSON.parse(localStorage.getItem("user"));
+      const role = user?.role || "guest";
+      const apiUrl = `http://localhost:8000/api/home?role=${role}`;
 
-      //cache homepage for one hour
-      if (cachedContent && cachedTimestamp && Date.now() - cachedTimestamp < 3600000) {
-        setHomeContent(JSON.parse(cachedContent));
-        setLoading(false);
-        return;
+      if (role === "caregiver" || role === "caretaker") {
+        const cachedContent = localStorage.getItem("homeContent");
+        const cachedTimestamp = localStorage.getItem("homeContentTimestamp");
+
+        // Use cached data if still valid (1 hour expiration)
+        if (cachedContent && cachedTimestamp && Date.now() - cachedTimestamp < 3600000) {
+          setHomeContent(JSON.parse(cachedContent));
+          setLoading(false);
+          return;
+        }
+      } else {
+        // Clear cached data if role is guest
+        localStorage.removeItem("homeContent");
+        localStorage.removeItem("homeContentTimestamp");
       }
 
       try {
-        const response = await fetch("http://localhost:8000/api/home");
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           const err = await response.json();
           throw new Error(err.message);
         }
         const data = await response.json();
         setHomeContent(data);
-        localStorage.setItem("homeContent", JSON.stringify(data));
-        localStorage.setItem("homeContentTimestamp", Date.now().toString());
+
+        if (role === "caregiver" || role === "caretaker") {
+          localStorage.setItem("homeContent", JSON.stringify(data));
+          localStorage.setItem("homeContentTimestamp", Date.now().toString());
+        }
+
         setLoading(false);
       } catch (e) {
         setError(e.message);
