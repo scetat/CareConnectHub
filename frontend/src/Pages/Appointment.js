@@ -76,7 +76,7 @@ const Appointments = () => {
   if (error) return <div>{error}</div>;
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const isCaretaker = user?.role === "Caretaker"; // Check if the user is a caretaker
+  const isCaretaker = user?.role === "Caretaker";
 
   return (
     <div className="appointments">
@@ -92,7 +92,7 @@ const Appointments = () => {
                   src={
                     appointment.CaregiverID.PhotoURL
                       ? appointment.CaregiverID.PhotoURL
-                      : "https://picsum.photos/100" // Default image
+                      : "https://picsum.photos/100"
                   }
                   alt="Caregiver"
                   className="appointment-image"
