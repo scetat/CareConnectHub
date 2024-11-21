@@ -4,7 +4,6 @@ import "../css/login.css";
 import logo from "../Assests/logo.png";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,7 +27,7 @@ const Login = () => {
       localStorage.setItem("isLoggedIn", data.user.isLoggedIn);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      navigate("/");
+      window.location = "/";
     } else {
       setError(data.message);
     }

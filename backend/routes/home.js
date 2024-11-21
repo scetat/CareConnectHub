@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    console.log("role is ", req.query.role);
     const role = req.query.role === "guest" ? "Caretaker" : req.query.role;
     const homeContent = await HomeContent.findOne({ role });
     if (!homeContent) {

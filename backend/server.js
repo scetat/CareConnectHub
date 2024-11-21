@@ -6,15 +6,16 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
+const appointmentRoutes = require("./routes/appointments");
 const homeRoute = require("./routes/home");
-const caregiversRoute = require('./routes/caregiver');
+const caregiversRoute = require("./routes/caregiver");
 const profileRoute = require("./routes/profile");
 const path = require("path");
 
 const app = express();
 
 const mongoUrl =
-  "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/";
+  "mongodb+srv://ogbunnamdi:cerberus@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Middleware to handle JSON requests
 app.use(express.json());
@@ -60,7 +61,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoute);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
-app.use('/api/caregiver', caregiversRoute);
+app.use("/api/caregiver", caregiversRoute);
+app.use("/api/appointments", appointmentRoutes);
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));

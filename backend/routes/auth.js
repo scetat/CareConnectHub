@@ -9,8 +9,6 @@ const Country = require("../models/Country");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  console.log("Received data:", req.body);
-
   const {
     firstName,
     lastName,
