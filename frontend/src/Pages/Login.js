@@ -29,11 +29,10 @@ const Login = () => {
       localStorage.setItem("isLoggedIn", data.user.isLoggedIn);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-
       if (data.user.role === "Admin") {
-        navigate("/admin");
+        window.location = "/admin";
       } else {
-        navigate("/");
+        window.location = "/";
       }
     } else {
       setError(data.message);
@@ -44,7 +43,7 @@ const Login = () => {
     <div className={`login-container ${isDarkMode ? "dark-theme" : "light-theme"}`}>
       <div className="theme-toggle-container">
         <button className="theme-toggle" onClick={toggleTheme}>
-           {isDarkMode ? "Light" : "Dark"} 
+          {isDarkMode ? "Light" : "Dark"}
         </button>
       </div>
 
