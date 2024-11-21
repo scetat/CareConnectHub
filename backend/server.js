@@ -6,8 +6,9 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/eventRoutes");
+const appointmentRoutes = require("./routes/appointments");
 const homeRoute = require("./routes/home");
-const caregiversRoute = require('./routes/caregiver');
+const caregiversRoute = require("./routes/caregiver");
 const profileRoute = require("./routes/profile");
 const Adminroutes = require("./routes/Adminroutes");
 const path = require("path");
@@ -61,11 +62,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoute);
 app.use("/api", eventRoutes);
 app.use("/api/home", homeRoute);
-app.use('/api/caregiver', caregiversRoute);
+
+app.use("/api/caregiver", caregiversRoute);
+app.use("/api/appointments", appointmentRoutes);
 app.use("/api/admin/events", Adminroutes); 
-
-
-
 
 
 // Serve React app
