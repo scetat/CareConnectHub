@@ -158,7 +158,7 @@
 
 
 .theme-toggle:hover {
-  background: var(--color-primary-dark);
+  background: #007bff;
 }
 
 /* Light theme */

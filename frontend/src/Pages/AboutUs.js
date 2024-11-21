@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/about.css';
 import aboutImage1 from '../Assests/images/aboutus_1.jpg'; 
 import aboutImage2 from '../Assests/images/aboutus_2.jpg'; 
 import aboutImage3 from '../Assests/images/aboutus_3.jpg'; 
 
 const About = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <div className="about-container">
-    
+    <div className={`about-container ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
+      <div className="theme-toggle-container">
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? 'Light' : 'Dark'}
+        </button>
+      </div>
+
       <section className="about-section">
         <h2>About Us</h2>
         <div className="about-content">
@@ -37,6 +48,7 @@ const About = () => {
           </ul>
         </div>
       </section>
+
       <section className="contact-section">
         <h2>Contact Us</h2>
         <div className="map-container">
