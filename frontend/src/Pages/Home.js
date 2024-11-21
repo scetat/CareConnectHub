@@ -7,6 +7,9 @@ const Home = () => {
   const [homeContent, setHomeContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false); // New state for theme toggle
+
+  const toggleTheme = () => setIsDarkMode((prevMode) => !prevMode);
 
   useEffect(() => {
     const fetchHomeContent = async () => {
@@ -18,14 +21,12 @@ const Home = () => {
         const cachedContent = localStorage.getItem("homeContent");
         const cachedTimestamp = localStorage.getItem("homeContentTimestamp");
 
-        // Use cached data if still valid (1 hour expiration)
         if (cachedContent && cachedTimestamp && Date.now() - cachedTimestamp < 3600000) {
           setHomeContent(JSON.parse(cachedContent));
           setLoading(false);
           return;
         }
       } else {
-        // Clear cached data if role is guest
         localStorage.removeItem("homeContent");
         localStorage.removeItem("homeContentTimestamp");
       }
@@ -58,9 +59,11 @@ const Home = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="home">
+    <div className={`home ${isDarkMode ? "dark-theme" : "light-theme"}`}>
+      <button onClick={toggleTheme} className="theme-toggle">
+        {isDarkMode ? "Light" : "Dark"} 
+      </button>
       <HeroSection heroImage={homeContent.heroImage} heroText={homeContent.heroText} />
-
       <main className="main-content">
         <div className="feature-container">
           <FeatureCard

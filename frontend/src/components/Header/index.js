@@ -73,9 +73,9 @@ const Header = () => {
           </Link>
         )}
         <Link
-          to="/booking"
-          className={`header__link ${activeLink === "booking" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("booking")}
+          to="/AppointmentPage"
+          className={`header__link ${activeLink === 'booking' ? 'header__link--active' : ''}`}
+          onClick={() => handleLinkClick('booking')}
         >
           BOOKING
         </Link>
@@ -104,8 +104,8 @@ const Header = () => {
           )}
         </div>
       ) : (
-        <Link to="/signup">
-          <button className="header__signup">Sign-up</button>
+        <Link to="/login">
+          <button className="header__signup">Login</button>
         </Link>
       )}
 

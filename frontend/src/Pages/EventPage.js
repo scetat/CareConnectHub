@@ -5,10 +5,11 @@ import '../css/style.css';
 const EventPage = () => {
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [darkTheme, setDarkTheme] = useState(false);  // Add state for dark theme
 
   // Fetch events from backend
   useEffect(() => {
-    fetch("http://localhost:8000/api/events") // Use the full backend URL with port
+    fetch("http://localhost:8000/api/events")
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error("Error fetching events:", error));
@@ -19,9 +20,13 @@ const EventPage = () => {
     event.event_name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Toggle dark theme
+  const toggleTheme = () => {
+    setDarkTheme(!darkTheme);
+  };
+
   return (
-    <div>
-      {/* Search Input */}
+    <div className={darkTheme ? 'dark-theme' : 'light-theme'}>
       <div style={{ margin: '20px' }}>
         <h1>Events</h1>
         <input
@@ -31,6 +36,10 @@ const EventPage = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        {/* Toggle Theme Button */}
+        <button onClick={toggleTheme} className="toggle-theme-button">
+          {darkTheme ? 'Light' : 'Dark'}
+        </button>
       </div>
       
       {/* Event Cards */}
@@ -39,8 +48,7 @@ const EventPage = () => {
           <div className="event-card" key={event._id}>
             <img src={event.imageUrl} alt={event.event_name} className="event-image" />
             <h3>{event.event_name}</h3>
-            <p>{event.description.slice(0, 100)}...</p> {/* Show first 150 characters of description */}
-            {/* Link to Event Detail Page */}
+            <p>{event.description.slice(0, 100)}...</p> 
             <Link to={`/event/${event._id}`}>
               <button className="more-details-button">More Details</button>
             </Link>

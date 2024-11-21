@@ -13,6 +13,12 @@ const AppointmentPage = () => {
     termsAccepted: false,
   });
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -31,13 +37,24 @@ const AppointmentPage = () => {
   };
 
   return (
-    <div className="appointment-page">
+    <div className={`appointment-page ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
+      <div className="theme-toggle-container">
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? 'Light' : 'Dark'}
+        </button>
+      </div>
       <h1>Book Appointment</h1>
       <div className="appointment-card">
         <div className="caregiver-info">
-          <div className="profile-initial">{caregiver && caregiver.UserID.FirstName.charAt(0)}</div>
+          <div className="profile-initial">
+            {caregiver && caregiver.UserID.FirstName.charAt(0)}
+          </div>
           <div className="caregiver-details">
-            <h3>{caregiver ? `${caregiver.UserID.FirstName} ${caregiver.UserID.LastName}` : 'Unknown'}</h3>
+            <h3>
+              {caregiver
+                ? `${caregiver.UserID.FirstName} ${caregiver.UserID.LastName}`
+                : 'Unknown'}
+            </h3>
             <p>Senior Caregiver</p>
           </div>
         </div>
@@ -45,15 +62,32 @@ const AppointmentPage = () => {
           <h3>Appointment Information</h3>
           <label>
             Appointment Date
-            <input type="date" name="date" value={formData.date} onChange={handleChange} required />
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
           </label>
           <label>
             Appointment Time
-            <input type="time" name="time" value={formData.time} onChange={handleChange} required />
+            <input
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              required
+            />
           </label>
           <label>
             Address
-            <textarea name="address" value={formData.address} onChange={handleChange} required />
+            <textarea
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
           </label>
           <div className="terms">
             <input
@@ -66,7 +100,9 @@ const AppointmentPage = () => {
               I accept the terms <a href="/terms">Read our T&Cs</a>
             </span>
           </div>
-          <button type="submit" className="confirm-button">Confirm Appointment</button>
+          <button type="submit" className="confirm-button">
+            Confirm Appointment
+          </button>
         </form>
       </div>
     </div>

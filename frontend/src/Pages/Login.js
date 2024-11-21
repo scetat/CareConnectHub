@@ -7,6 +7,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => setIsDarkMode((prevMode) => !prevMode);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,18 +26,28 @@ const Login = () => {
     const data = await response.json();
 
     if (response.ok) {
-      // Store login status in localStorage
       localStorage.setItem("isLoggedIn", data.user.isLoggedIn);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      window.location = "/";
+
+      if (data.user.role === "Admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } else {
       setError(data.message);
     }
   };
 
   return (
-    <div className="login-container">
+    <div className={`login-container ${isDarkMode ? "dark-theme" : "light-theme"}`}>
+      <div className="theme-toggle-container">
+        <button className="theme-toggle" onClick={toggleTheme}>
+           {isDarkMode ? "Light" : "Dark"} 
+        </button>
+      </div>
+
       <div className="login-logo-container">
         <img src={logo} alt="Care Connect Hub Logo" className="login-logo" />
         <h1>SIGN IN</h1>
