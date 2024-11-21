@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const response = await fetch("http://localhost:8000/api/auth/login", {
       method: "POST",
       credentials: "include",
@@ -20,19 +20,24 @@ const Login = () => {
       },
       body: JSON.stringify({ email, password }),
     });
-
+  
     const data = await response.json();
-
+  
     if (response.ok) {
       // Store login status in localStorage
       localStorage.setItem("isLoggedIn", data.user.isLoggedIn);
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      navigate("/");
+  
+      if (data.user.role === "Admin") {
+        navigate("/admin"); // Redirect admins to the admin page
+      } else {
+        navigate("/"); // Redirect regular users to the home page
+      }
     } else {
       setError(data.message);
     }
   };
+  
 
   return (
     <div className="login-container">

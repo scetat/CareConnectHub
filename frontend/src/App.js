@@ -1,41 +1,50 @@
-import { BrowserRouter as Router, Route, Switch, BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
-import Home from "./Pages/Home";
 import Footer from "./components/Footer";
+import Home from "./Pages/Home";
 import SignUpPage from "./Pages/SignUpPage";
-import "./index.css";
-import CaregiverHome from "./Pages/CaregiverHome";
 import CaregiverMatch from "./Pages/CaregiverMatch";
 import About from "./Pages/AboutUs";
 import Login from "./Pages/Login";
 import EventPage from "./Pages/EventPage";
 import ManageProfile from "./Pages/ManageProfile";
-import EventDetail from './components/EventDetail';
+import EventDetail from "./components/EventDetail";
 import Moreinfo from "./Pages/Moreinfo";
 import AppointmentPage from "./Pages/AppointmentPage";
 import Appointment from "./Pages/Appointment";
+import AdminDashboard from "./components/AdminDashboard" // New Admin Dashboard Page
+import AdminEvent from "./Pages/AdminEvent";
+// New Admin Manage Users Page
+import "./index.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Header />
       <Routes>
-        <Route path="/" exact={true} element={<Home />} />
-
-        <Route path="/home" exact={true} element={<Home />} />
-        <Route path="/caregiver" exact={true} element={<CaregiverMatch />} />
+        {/* Public Routes */}
+        <Route path="/" exact element={<Home />} />
+        <Route path="/home" exact element={<Home />} />
+        <Route path="/caregiver" exact element={<CaregiverMatch />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/about" exact={true} element={<About />} />
-        <Route path="/login" exact={true} element={<Login />} />
+        <Route path="/about" exact element={<About />} />
+        <Route path="/login" exact element={<Login />} />
         <Route path="/events" element={<EventPage />} />
         <Route path="/manage" element={<ManageProfile />} />
         <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/moreinfo" element={<Moreinfo />} />
-        <Route path="/AppointmentPage" element={<AppointmentPage />} />
-        <Route path="/Appointment" element={<Appointment />} />
+        <Route path="/AppointmentPage" element={<AppointmentPage />}/>
+        <Route path="/Appointment" element={<Appointment />}/>
+         <Route path="/AdminEvent" element={<AdminEvent />}/>
+
+        {/* Admin Routes */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+       
+        {/* Redirect to Home for unknown routes */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </Router>
   );
 }
 

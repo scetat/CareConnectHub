@@ -71,7 +71,7 @@ const Header = () => {
           APPOINTMENT
         </Link>
         <Link
-          to="/booking"
+          to="/AppointmentPage"
           className={`header__link ${activeLink === 'booking' ? 'header__link--active' : ''}`}
           onClick={() => handleLinkClick('booking')}
         >
