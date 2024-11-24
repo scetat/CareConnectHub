@@ -4,12 +4,17 @@ import '../css/AppointmentPage.css';
 
 const AppointmentPage = () => {
   const location = useLocation();
-  const caregiver = location.state?.caregiver;
+  const caregiver = location.state?.caregiver; 
+  const userID = caregiver?.UserID?._id;
 
   const [formData, setFormData] = useState({
     date: '',
     time: '',
-    address: '',
+    houseNo: '',
+    street: '',
+    city: '',
+    zipCode: '',
+    state: '',
     termsAccepted: false,
   });
 
@@ -27,12 +32,51 @@ const AppointmentPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.termsAccepted) {
-      alert('Appointment confirmed!');
-    } else {
+
+    if (!formData.termsAccepted) {
       alert('Please accept the terms and conditions.');
+      return;
+    }
+
+    if (!userID) {
+      alert('User ID is missing. Please try again.');
+      return;
+    }
+
+    const payload = {
+      UserID: userID, 
+      CaregiverID: caregiver._id, 
+      Date: formData.date,
+      Time: formData.time,
+      houseNo: formData.houseNo,
+      street: formData.street,
+      city: formData.city, 
+      zipCode: formData.zipCode,
+      stateName: formData.state, 
+      Note: '', 
+    };
+    
+    
+
+    try {
+      const response = await fetch('http://localhost:8000/api/appointment/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Appointment confirmed!');
+      } else {
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      alert('Failed to book the appointment. Please try again.');
     }
   };
 
@@ -45,20 +89,20 @@ const AppointmentPage = () => {
       </div>
       <h1>Book Appointment</h1>
       <div className="appointment-card">
-        <div className="caregiver-info">
-          <div className="profile-initial">
-            {caregiver && caregiver.UserID.FirstName.charAt(0)}
-          </div>
-          <div className="caregiver-details">
-            <h3>
-              {caregiver
-                ? `${caregiver.UserID.FirstName} ${caregiver.UserID.LastName}`
-                : 'Unknown'}
-            </h3>
-            <p>Senior Caregiver</p>
-          </div>
-        </div>
         <form className="appointment-form" onSubmit={handleSubmit}>
+          <div className="caregiver-info">
+            <div className="profile-initial">
+              {caregiver && caregiver.UserID.FirstName.charAt(0)}
+            </div>
+            <div className="caregiver-details">
+              <h3>
+                {caregiver
+                  ? `${caregiver.UserID.FirstName} ${caregiver.UserID.LastName}`
+                  : 'Unknown'}
+              </h3>
+              <p>Senior Caregiver</p>
+            </div>
+          </div>
           <h3>Appointment Information</h3>
           <label>
             Appointment Date
@@ -80,11 +124,53 @@ const AppointmentPage = () => {
               required
             />
           </label>
+          <h3>Address Information</h3>
           <label>
-            Address
-            <textarea
-              name="address"
-              value={formData.address}
+            House Number
+            <input
+              type="text"
+              name="houseNo"
+              value={formData.houseNo}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Street
+            <input
+              type="text"
+              name="street"
+              value={formData.street}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            City
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Zip Code
+            <input
+              type="text"
+              name="zipCode"
+              value={formData.zipCode}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            State
+            <input
+              type="text"
+              name="state"
+              value={formData.state}
               onChange={handleChange}
               required
             />

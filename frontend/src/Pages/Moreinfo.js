@@ -50,8 +50,8 @@ const Moreinfo = () => {
           <p>Availability: {caregiver.Availability || "N/A"}</p>
           <p>Rating: {"★".repeat(Math.round(caregiver.Rating))}</p>
         </div>
-        <div className="card-buttons">
-          <button className="cancel-button" onClick={handleCancelClick}>Cancel</button>
+        <div className="card_buttons">
+          <button className="cancel_button" onClick={handleCancelClick}>Cancel</button>
           <button className="book-button" onClick={handleBookAppointmentClick}>Book Appointment</button>
         </div>
       </div>

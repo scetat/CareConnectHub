@@ -132,7 +132,7 @@
     margin-top: 10px;
 }
 
-.cancel-button,
+.cancel_button,
 .book-button {
     border-width: 1px;
     border-color: #00204A;
@@ -144,13 +144,13 @@
     transition: background-color 0.3s ease;
 }
 
-.cancel-button {
+.cancel_button {
     background-color: white;
     color: #00204A;
     border: 1px solid #00204A; 
 }
 
-.cancel-button:hover {
+.cancel_button:hover {
     background-color: #00406b;
     color: white;
 }

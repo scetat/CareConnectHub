@@ -11,12 +11,13 @@ const homeRoute = require("./routes/home");
 const caregiversRoute = require("./routes/caregiver");
 const profileRoute = require("./routes/profile");
 const Adminroutes = require("./routes/Adminroutes");
+const Appointment = require("./routes/appointment");
 const path = require("path");
 
 const app = express();
 
 const mongoUrl =
-  "mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/";
+  "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/";
 
 // Middleware to handle JSON requests
 app.use(express.json());
@@ -66,7 +67,7 @@ app.use("/api/home", homeRoute);
 app.use("/api/caregiver", caregiversRoute);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/admin/events", Adminroutes); 
-
+app.use('/api/appointment', Appointment);
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));
