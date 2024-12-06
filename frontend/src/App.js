@@ -14,6 +14,7 @@ import AppointmentPage from "./Pages/AppointmentPage";
 import Appointment from "./Pages/Appointment";
 import AdminDashboard from "./components/AdminDashboard" // New Admin Dashboard Page
 import AdminEvent from "./Pages/AdminEvent";
+import BookingPage from "./Pages/BookingPage";
 // New Admin Manage Users Page
 import "./index.css";
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/AppointmentPage" element={<AppointmentPage />}/>
         <Route path="/Appointment" element={<Appointment />}/>
          <Route path="/AdminEvent" element={<AdminEvent />}/>
+         <Route path="/BookingPage" element={<BookingPage />}/>
 
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />

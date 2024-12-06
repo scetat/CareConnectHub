@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../css/AppointmentPage.css';
 
 const AppointmentPage = () => {
   const location = useLocation();
-  const caregiver = location.state?.caregiver; 
-  const userID = caregiver?.UserID?._id;
+  const caregiver = location.state?.caregiver;
 
   const [formData, setFormData] = useState({
     date: '',
@@ -19,6 +18,18 @@ const AppointmentPage = () => {
   });
 
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [userID, setUserID] = useState(null);
+
+  // Fetch logged-in user ID from local storage on component mount
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.id) {
+      setUserID(user.id);
+    } else {
+      alert('User not logged in. Please log in first.');
+      window.location = '/login'; 
+    }
+  }, []);
 
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -46,19 +57,17 @@ const AppointmentPage = () => {
     }
 
     const payload = {
-      UserID: userID, 
-      CaregiverID: caregiver._id, 
+      UserID: userID,
+      CaregiverID: caregiver._id,
       Date: formData.date,
       Time: formData.time,
       houseNo: formData.houseNo,
       street: formData.street,
-      city: formData.city, 
+      city: formData.city,
       zipCode: formData.zipCode,
-      stateName: formData.state, 
-      Note: '', 
+      stateName: formData.state,
+      Note: '',
     };
-    
-    
 
     try {
       const response = await fetch('http://localhost:8000/api/appointment/create', {

@@ -68,4 +68,69 @@ router.post('/create', async (req, res) => {
   }
 });
 
+
+router.get("/user/:userID", async (req, res) => {
+  const { userID } = req.params;
+
+  try {
+    const appointments = await Appointment.find({ UserID: userID })
+      .populate({
+        path: "CaregiverID",
+        populate: { path: "UserID", select: "FirstName LastName" },
+      })
+      .populate({
+        path: "AddressID", 
+        populate: { path: "State", select: "StateName" }, 
+      });
+
+    if (!appointments || appointments.length === 0) {
+      return res.status(404).json({ success: false, message: "No appointments found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      appointments,
+    });
+  } catch (error) {
+    console.error("Error fetching appointments:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve appointments.",
+      error: error.message,
+    });
+  }
+});
+
+
+router.patch("/cancel/:appointmentId", async (req, res) => {
+  const { appointmentId } = req.params;
+
+  try {
+    const appointment = await Appointment.findById(appointmentId);
+
+    if (!appointment) {
+      return res.status(404).json({ success: false, message: "Appointment not found." });
+    }
+
+    if (appointment.StatusID === "cancelled") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Appointment is already cancelled." });
+    }
+
+    appointment.StatusID = "cancelled";
+    await appointment.save();
+
+    res.status(200).json({ success: true, message: "Appointment cancelled successfully." });
+  } catch (error) {
+    console.error("Error canceling appointment:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to cancel appointment.",
+      error: error.message,
+    });
+  }
+});
+
+
 module.exports = router;
