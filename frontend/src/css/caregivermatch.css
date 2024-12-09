@@ -158,6 +158,64 @@ header {
     background-color: #555;
 }
 
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .search-bar input {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+}
+
+.dark-mode .search-bar .search-btn {
+    background-color: #555;
+    color: #ffffff;
+}
+
+.dark-mode .filter-section {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.dark-mode .filter-group input,
+.dark-mode .filter-group select {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
+}
+
+.dark-mode .result-card {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.dark-mode .result-info button {
+    background-color: #555555;
+    color: #ffffff;
+}
+
+.dark-mode .result-info button:hover {
+    background-color: #777777;
+}
+ 
+.dark-mode .result-info h3 {
+    color: #ffffff;
+}
+
+.dark-mode .results-section h2 {
+    color: #ffffff;
+}
+
+.dark-mode .filter-section h2 {
+    color: #ffffff;
+}
+
+.dark-mode .filter-group label {
+    color: #ffffff;
+}
+
 @media (max-width: 1024px) {
     .filter-section {
         width: 45%;

@@ -9,8 +9,8 @@ const CaregiverMatch = () => {
   const [ratingFilter, setRatingFilter] = useState('');
   const [hourlyRateFilter, setHourlyRateFilter] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchCaregivers = async () => {
       try {
@@ -61,6 +61,11 @@ const CaregiverMatch = () => {
     navigate('/moreinfo', { state: { caregiver } });
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.classList.toggle('dark-mode', !isDarkMode);
+  };
+
   return (
     <div className="caregiver-container">
       <header>
@@ -74,6 +79,9 @@ const CaregiverMatch = () => {
           />
           <button className="search-btn">Search</button>
         </div>
+        <button className="search-btn" onClick={toggleDarkMode}>
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
       </header>
 
       <div className="filter-results-container">
