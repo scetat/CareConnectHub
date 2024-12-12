@@ -21,6 +21,10 @@ const Moreinfo = () => {
     navigate('/AppointmentPage', { state: { caregiver } });
   };
 
+  const handleFeedbackClick = () => {
+    navigate('/feedback', { state: { caregiver } });
+  };
+
   return (
     <div className="caregiver-card">
       <div className="card-header">
@@ -53,6 +57,7 @@ const Moreinfo = () => {
         <div className="card_buttons">
           <button className="cancel_button" onClick={handleCancelClick}>Cancel</button>
           <button className="book-button" onClick={handleBookAppointmentClick}>Book Appointment</button>
+          <button className="feedback-button" onClick={handleFeedbackClick}>Leave Feedback</button>
         </div>
       </div>
     </div>
