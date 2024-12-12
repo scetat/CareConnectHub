@@ -8,6 +8,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Dropdown state
+  const [userRole, setUserRole] = useState(""); // State to store the user's role
 
   useEffect(() => {
     const loggedInStatus = localStorage.getItem("isLoggedIn");
@@ -15,6 +16,10 @@ const Header = () => {
 
     const savedActiveLink = localStorage.getItem("activeLink") || "home";
     setActiveLink(savedActiveLink);
+
+    // Retrieve and parse the user data from localStorage
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    setUserRole(user.role || "");
   }, []);
 
   const handleLinkClick = (link) => {
@@ -42,10 +47,12 @@ const Header = () => {
         <img src="/logo.png" alt="Care Connect Hub" />
       </div>
       <div className={`header__nav ${isMenuOpen ? "open" : ""}`}>
-        <Link
+        {userRole !== 'Admin' && (
+          <>
+          <Link
           to="/home"
           className={`header__link ${activeLink === "home" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("Home")}
+          onClick={() => handleLinkClick("home")}
         >
           HOME
         </Link>
@@ -73,9 +80,9 @@ const Header = () => {
           </Link>
         )}
         <Link
-          to="/AppointmentPage"
-          className={`header__link ${activeLink === 'booking' ? 'header__link--active' : ''}`}
-          onClick={() => handleLinkClick('booking')}
+          to="/BookingPage"
+          className={`header__link ${activeLink === "booking" ? "header__link--active" : ""}`}
+          onClick={() => handleLinkClick("booking")}
         >
           BOOKING
         </Link>
@@ -86,6 +93,28 @@ const Header = () => {
         >
           ABOUT US
         </Link>
+        </>)}
+
+        {/* Conditionally render the Admin Event link */}
+        {userRole === "Admin" && (
+          <>
+          <Link
+            to="/adminevent"
+            className={`header__link ${activeLink === "adminevent" ? "header__link--active" : ""}`}
+            onClick={() => handleLinkClick("adminevent")}
+          >
+            ADMIN EVENT
+          </Link>
+          <Link
+          to="/events"
+          className={`header__link ${activeLink === "events" ? "header__link--active" : ""}`}
+          onClick={() => handleLinkClick("events")}
+        >
+          EVENT
+        </Link>
+        </>
+
+        )}
       </div>
 
       {/* Conditionally render the profile button with dropdown */}

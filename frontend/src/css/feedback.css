@@ -1,0 +1,102 @@
+.feedback-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .feedback-form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .feedback-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .feedback-form select,
+  .feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border 0.3s, background-color 0.3s;
+  }
+  
+  .feedback-form select:focus,
+  .feedback-form textarea:focus {
+    border: 1px solid #007bff;
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  .feedback-form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .feedback-form .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .feedback-form .cancel-button,
+.feedback-form .submit-button {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-form .cancel-button {
+  background: linear-gradient(135deg, #f85032, #e73827); /* Gradient from orange to red */
+  color: white;
+}
+
+.feedback-form .submit-button {
+  background: linear-gradient(135deg, #7cabee, #00204A); /* Gradient from green to teal */
+  color: white;
+}
+
+.feedback-form .cancel-button:hover {
+  background: linear-gradient(135deg, #e73827, #c12719); /* Darker gradient on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 10px rgba(231, 56, 39, 0.3);
+}
+
+.feedback-form .submit-button:hover {
+  background: linear-gradient(135deg, #3bb2b8, #2a7d85); /* Darker gradient on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 10px rgba(59, 178, 184, 0.3);
+}
+
+.feedback-form .cancel-button:active,
+.feedback-form .submit-button:active {
+  transform: translateY(0); /* Button returns to normal position */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-form .cancel-button:focus,
+.feedback-form .submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 4px 2px rgba(0, 123, 255, 0.5); /* Focus effect */
+}

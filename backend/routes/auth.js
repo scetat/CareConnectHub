@@ -134,4 +134,23 @@ router.post("/logout", (req, res) => {
   });
 });
 
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const { Email, newPassword } = req.body; // Expecting both Email and newPassword
+    const user = await User.findOne({ Email });
+    if (!user) {
+      return res.status(404).json({ error: "User  not found!" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const encryptedPassword = await bcrypt.hash(newPassword, salt);
+    await User.findByIdAndUpdate(user._id, { Password: encryptedPassword }, { new: true });
+
+    return res.status(200).json({ success: true, message: "Password changed successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: 'Internal Server Error!' });
+  }
+});
+
 module.exports = router;

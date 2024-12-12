@@ -21,6 +21,10 @@ const Moreinfo = () => {
     navigate('/AppointmentPage', { state: { caregiver } });
   };
 
+  const handleFeedbackClick = () => {
+    navigate('/feedback', { state: { caregiver } });
+  };
+
   return (
     <div className="caregiver-card">
       <div className="card-header">
@@ -50,9 +54,10 @@ const Moreinfo = () => {
           <p>Availability: {caregiver.Availability || "N/A"}</p>
           <p>Rating: {"★".repeat(Math.round(caregiver.Rating))}</p>
         </div>
-        <div className="card-buttons">
-          <button className="cancel-button" onClick={handleCancelClick}>Cancel</button>
+        <div className="card_buttons">
+          <button className="cancel_button" onClick={handleCancelClick}>Cancel</button>
           <button className="book-button" onClick={handleBookAppointmentClick}>Book Appointment</button>
+          <button className="feedback-button" onClick={handleFeedbackClick}>Leave Feedback</button>
         </div>
       </div>
     </div>
