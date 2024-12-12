@@ -21,7 +21,6 @@ The platform streamlines the process of finding care services, enabling users to
   - [Frontend Setup](#frontend-setup)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
-  
 
 ## Features
 
@@ -58,10 +57,10 @@ This repository contains separate directories for the frontend and backend. To r
    - In your editor, open `backend/server.js` and replace the connection string on line 24 with your MongoDB connection string.
    - Open `backend/seeders/seedHomeContent.js` and replace the MongoDB connection string on line 4 with your own.
 
-   To populate the database with initial content for the home page, run the following command in your terminal:
+   To populate the database with initial content for the home page and other pages, run the following command in your terminal:
 
    ```bash
-   node seeders/seedHomeContent.js
+   node seeders/seedHomeContent.js && node seeders/eventsSeeder.js
    ```
 
 4. Start the backend server:
@@ -99,8 +98,6 @@ Once both frontend and backend servers are running, you can access the applicati
   - Node.js
   - Express.js
   - MongoDB
-
-
 
 Thank you!  
 **Connect Hub Team**

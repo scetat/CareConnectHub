@@ -18,7 +18,6 @@ const Event = mongoose.model("Event", eventSchema);
 // Seed data
 const eventSeedData = [
   {
-    _id: mongoose.Types.ObjectId("66fe2bf693ac44de0b4afc0e"),
     event_name: "Learning for Life: Education for Caretakers",
     description:
       "Expand your knowledge and learn valuable life skills at Learning for Life! This educational event is designed for caretakers, providing helpful information on managing day-to-day tasks, maintaining your health, and staying active. Led by experienced professionals, this seminar will empower you to live independently with confidence.",
@@ -31,7 +30,6 @@ const eventSeedData = [
     updatedAt: new Date("2024-10-03T05:30:30.804Z"),
   },
   {
-    _id: mongoose.Types.ObjectId("66fe2bf693ac44de0b4afc10"),
     event_name: "Relaxation & Pampering Retreat",
     description:
       "Treat yourself to a day of relaxation at our Relaxation & Pampering Retreat! This event is all about helping caretakers unwind and enjoy soothing activities like massage therapy, gentle yoga, and more. Reconnect with your body and mind in a serene, peaceful environment designed just for you.",
@@ -44,7 +42,6 @@ const eventSeedData = [
     updatedAt: new Date("2024-10-03T05:30:30.805Z"),
   },
   {
-    _id: mongoose.Types.ObjectId("66fe2bf693ac44de0b4afc0f"),
     event_name: "Family Fun & Support Day",
     description:
       "Strengthen your bonds with loved ones at Family Fun & Support Day! Enjoy fun activities, games, and workshops designed to bring families closer together. This event encourages caretakers and their families to connect, communicate, and support each other. It's a wonderful opportunity to enjoy quality time with family while learning ways to enhance your care experience.",
@@ -57,7 +54,6 @@ const eventSeedData = [
     updatedAt: new Date("2024-10-03T05:30:30.804Z"),
   },
   {
-    _id: mongoose.Types.ObjectId("66fe2bf693ac44de0b4afc11"),
     event_name: "Cooking & Nutrition for a Healthy You",
     description:
       "Learn how to prepare easy, nutritious meals at Cooking & Nutrition for a Healthy You! This interactive workshop focuses on simple recipes that can improve your health and well-being. Perfect for caretakers who want to maintain their independence, this class will guide you through healthy eating habits and cooking techniques that fit your lifestyle.",
@@ -70,7 +66,6 @@ const eventSeedData = [
     updatedAt: new Date("2024-10-03T05:30:30.805Z"),
   },
   {
-    _id: mongoose.Types.ObjectId("66fe2bf693ac44de0b4afc12"),
     event_name: "Mindfulness & Stress Relief Session",
     description:
       "Are you feeling stressed or overwhelmed? Join us for a Mindfulness & Stress Relief Session to learn techniques that help calm the mind and reduce stress. This session is designed for caretakers and focuses on simple mindfulness exercises you can practice daily to improve your mental well-being.",
@@ -83,7 +78,6 @@ const eventSeedData = [
     updatedAt: new Date("2024-10-03T05:30:30.805Z"),
   },
   {
-    _id: mongoose.Types.ObjectId("66fe2bf693ac44de0b4afc0d"),
     event_name: "Health Check & Wellness Day",
     description:
       "Take control of your health! Join us for Health Check & Wellness Day, where you can receive free health screenings and personalized wellness advice. Meet healthcare professionals who will guide you through managing chronic conditions and improving your daily well-being. This event is designed to provide valuable health resources to those who need care and support.",
@@ -99,7 +93,7 @@ const eventSeedData = [
 // Connect to MongoDB and insert seed data
 mongoose
   .connect(
-    "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/",
+    "mongodb+srv://ogbunnamdi:cerberus@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
