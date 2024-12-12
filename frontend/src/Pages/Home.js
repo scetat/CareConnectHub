@@ -32,7 +32,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, { credentials: "include" });
         if (!response.ok) {
           const err = await response.json();
           throw new Error(err.message);

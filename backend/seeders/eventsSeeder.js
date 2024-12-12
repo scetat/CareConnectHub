@@ -92,13 +92,10 @@ const eventSeedData = [
 
 // Connect to MongoDB and insert seed data
 mongoose
-  .connect(
-    "mongodb+srv://ogbunnamdi:cerberus@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect("mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
 

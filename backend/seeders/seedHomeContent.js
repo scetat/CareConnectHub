@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const HomeContent = require("../models/HomeContent");
 
-const dbURI =
-  "mongodb+srv://ogbunnamdi:cerberus@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const dbURI = "mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/";
 
 const seedData = {
   role: "Caretaker",

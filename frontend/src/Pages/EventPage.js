@@ -9,7 +9,7 @@ const EventPage = () => {
 
   // Fetch events from backend
   useEffect(() => {
-    fetch("https://careconnecthub-backend.onrender.com/api/events")
+    fetch("https://careconnecthub-backend.onrender.com/api/events", { credentials: "include" })
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error("Error fetching events:", error));
