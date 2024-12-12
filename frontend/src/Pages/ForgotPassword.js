@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/Forgot.css";
+import logo from "../Assests/logo.png";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -35,11 +37,14 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="forgot-password-container">
+    <div className="login-container">
+      <div className="login-logo-container">
+        <img src={logo} alt="Logo" className="login-logo" />
+      </div>
       <h1>Reset Password</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -53,7 +58,7 @@ const ForgotPassword = () => {
         </div>
 
         <div className="form-group">
-          <label>New Password</label>
+          <label htmlFor="newPassword">New Password</label>
           <input
             type="password"
             id="newPassword"
@@ -66,13 +71,17 @@ const ForgotPassword = () => {
           />
         </div>
 
-        <button type="submit" className="forgot-password-button">
+        <button type="submit" className="login-button">
           Reset Password
         </button>
 
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
       </form>
+
+      <div className="login-signup-link">
+        <p>Remembered your password? <a href="/login">Login here</a></p>
+      </div>
     </div>
   );
 };
