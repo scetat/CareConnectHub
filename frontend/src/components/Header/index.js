@@ -47,73 +47,76 @@ const Header = () => {
         <img src="/logo.png" alt="Care Connect Hub" />
       </div>
       <div className={`header__nav ${isMenuOpen ? "open" : ""}`}>
-        {userRole !== 'Admin' && (
+        {userRole !== "Admin" && (
           <>
-          <Link
-          to="/home"
-          className={`header__link ${activeLink === "home" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("home")}
-        >
-          HOME
-        </Link>
-        <Link
-          to="/events"
-          className={`header__link ${activeLink === "events" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("events")}
-        >
-          EVENT
-        </Link>
-        <Link
-          to="/caregiver"
-          className={`header__link ${activeLink === "caregiver" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("caregiver")}
-        >
-          CAREGIVER
-        </Link>
-        {isLoggedIn && (
-          <Link
-            to="/appointment"
-            className={`header__link ${activeLink === "appointment" ? "header__link--active" : ""}`}
-            onClick={() => handleLinkClick("appointment")}
-          >
-            APPOINTMENT
-          </Link>
+            <Link
+              to="/home"
+              className={`header__link ${activeLink === "home" ? "header__link--active" : ""}`}
+              onClick={() => handleLinkClick("home")}
+            >
+              HOME
+            </Link>
+            <Link
+              to="/events"
+              className={`header__link ${activeLink === "events" ? "header__link--active" : ""}`}
+              onClick={() => handleLinkClick("events")}
+            >
+              EVENT
+            </Link>
+            <Link
+              to="/caregiver"
+              className={`header__link ${activeLink === "caregiver" ? "header__link--active" : ""}`}
+              onClick={() => handleLinkClick("caregiver")}
+            >
+              CAREGIVER
+            </Link>
+            {userRole === "Caregiver" && (
+              <Link
+                to="/appointment"
+                className={`header__link ${activeLink === "appointment" ? "header__link--active" : ""}`}
+                onClick={() => handleLinkClick("appointment")}
+              >
+                APPOINTMENTS
+              </Link>
+            )}
+            {userRole === "Caretaker" && (
+              <Link
+                to="/BookingPage"
+                className={`header__link ${activeLink === "booking" ? "header__link--active" : ""}`}
+                onClick={() => handleLinkClick("booking")}
+              >
+                BOOKING
+              </Link>
+            )}
+
+            <Link
+              to="/about"
+              className={`header__link ${activeLink === "about" ? "header__link--active" : ""}`}
+              onClick={() => handleLinkClick("about")}
+            >
+              ABOUT US
+            </Link>
+          </>
         )}
-        <Link
-          to="/BookingPage"
-          className={`header__link ${activeLink === "booking" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("booking")}
-        >
-          BOOKING
-        </Link>
-        <Link
-          to="/about"
-          className={`header__link ${activeLink === "about" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("about")}
-        >
-          ABOUT US
-        </Link>
-        </>)}
 
         {/* Conditionally render the Admin Event link */}
         {userRole === "Admin" && (
           <>
-          <Link
-            to="/adminevent"
-            className={`header__link ${activeLink === "adminevent" ? "header__link--active" : ""}`}
-            onClick={() => handleLinkClick("adminevent")}
-          >
-            ADMIN EVENT
-          </Link>
-          <Link
-          to="/events"
-          className={`header__link ${activeLink === "events" ? "header__link--active" : ""}`}
-          onClick={() => handleLinkClick("events")}
-        >
-          EVENT
-        </Link>
-        </>
-
+            <Link
+              to="/adminevent"
+              className={`header__link ${activeLink === "adminevent" ? "header__link--active" : ""}`}
+              onClick={() => handleLinkClick("adminevent")}
+            >
+              ADMIN EVENT
+            </Link>
+            <Link
+              to="/events"
+              className={`header__link ${activeLink === "events" ? "header__link--active" : ""}`}
+              onClick={() => handleLinkClick("events")}
+            >
+              EVENT
+            </Link>
+          </>
         )}
       </div>
 
