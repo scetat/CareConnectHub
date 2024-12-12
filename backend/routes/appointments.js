@@ -18,8 +18,6 @@ router.get("/", async (req, res) => {
       .populate("StatusID", "StatusName")
       .populate("AddressID");
 
-    console.log(appointments);
-
     res.status(200).json(appointments);
   } catch (error) {
     console.error("Error fetching caregiver appointments:", error);

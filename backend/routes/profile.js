@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Caregiver = require("../models/Caregiver");
 const CaregiverAvailability = require("../models/CaregiverAvailability");
 const CaregiverQualifications = require("../models/CaregiverQualifications");
+const { default: mongoose } = require("mongoose");
 
 const router = express.Router();
 
@@ -25,10 +26,10 @@ router.get("/", async (req, res) => {
       email: user.Email,
       phone: user.Phone,
       address: address,
-      role: user.Role.name,
+      role: user.Role.RoleName,
     };
 
-    if (user.Role.name === "Caregiver") {
+    if (user.Role.RoleName === "Caregiver") {
       const caregiver = await Caregiver.findOne({ UserID: userId });
       if (!caregiver) {
         return res.status(404).json({ message: "Caregiver details not found" });
@@ -55,65 +56,85 @@ router.get("/", async (req, res) => {
       };
     }
 
-    res.json(profileData);
+    res.status(200).json(profileData);
   } catch (error) {
     console.error("Error fetching profile:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
-router.put("/profile", async (req, res) => {
+router.put("/", async (req, res) => {
   const { userData, caregiverData } = req.body;
 
   try {
     const userId = req.session.user.id;
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      {
-        Email: userData.email,
-        Phone: userData.phone,
-        Address: userData.address,
-      },
-      { new: true }
-    );
-
-    if (!updatedUser) {
+    const user = await User.findById(userId).populate("Role");
+    if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    if (updatedUser.Role.name === "Caregiver" && caregiverData) {
-      const updatedCaregiver = await Caregiver.findOneAndUpdate(
-        { UserID: userId },
-        {
-          Experience: caregiverData.experience,
-          HourlyRate: caregiverData.hourlyRate,
-        },
-        { new: true }
-      );
+    // Update user data if provided
+    if (userData) {
+      user.Email = userData.email;
+      user.Phone = userData.phone;
 
-      if (!updatedCaregiver) {
+      await user.save();
+    }
+
+    if (caregiverData && user.Role.RoleName === "Caregiver") {
+      const caregiver = await Caregiver.findOne({ UserID: userId });
+      if (!caregiver) {
         return res.status(404).json({ message: "Caregiver details not found" });
       }
 
-      await CaregiverAvailability.deleteMany({ CaregiverID: updatedCaregiver._id });
-      const availabilityDocs = caregiverData.availability.map((day) => ({
-        CaregiverID: updatedCaregiver._id,
-        DayofWeek: day.dayOfWeek,
-        StartTime: day.startTime,
-        EndTime: day.endTime,
-      }));
-      await CaregiverAvailability.insertMany(availabilityDocs);
+      if (caregiverData.experience !== undefined) caregiver.Experience = caregiverData.experience;
+      if (caregiverData.hourlyRate !== undefined)
+        caregiver.HourlyRate = mongoose.Types.Decimal128.fromString(caregiverData.hourlyRate);
 
-      await CaregiverQualifications.deleteMany({ CaregiverID: updatedCaregiver._id });
-      const qualificationDocs = caregiverData.qualifications.map((qualification) => ({
-        CaregiverID: updatedCaregiver._id,
-        QualificationID: qualification, // Ensure qualification is sent as an ObjectID
-      }));
-      await CaregiverQualifications.insertMany(qualificationDocs);
+      await caregiver.save();
+
+      // Update Availability
+      // if (caregiverData.availability) {
+      //   // Delete existing availability
+      //   await CaregiverAvailability.deleteMany({ CaregiverID: caregiver._id });
+
+      //   // Insert new availability
+      //   const availabilityDocs = Object.keys(caregiverData.availability).map((day) => ({
+      //     CaregiverID: caregiver._id,
+      //     DayofWeek: day,
+      //     StartTime: caregiverData.availability[day].start || "",
+      //     EndTime: caregiverData.availability[day].end || "",
+      //   }));
+      //   await CaregiverAvailability.insertMany(availabilityDocs);
+      // }
+
+      // Update Qualifications
+      // if (caregiverData.qualifications) {
+      //   // Delete existing qualifications
+      //   await CaregiverQualifications.deleteMany({ CaregiverID: caregiver._id });
+
+      //   // Insert new qualifications
+      //   // Assuming qualifications are sent as an array of qualification names
+      //   // You need to convert them to ObjectIDs based on your Qualification model
+      //   // Here's a simplified approach:
+
+      //   // First, find all Qualification IDs based on names
+      //   const Qualification = require("../models/Qualification"); // Adjust the path as necessary
+      //   const qualifications = await Qualification.find({
+      //     name: { $in: caregiverData.qualifications },
+      //   });
+
+      //   const qualificationDocs = qualifications.map((qual) => ({
+      //     CaregiverID: caregiver._id,
+      //     QualificationID: qual._id,
+      //   }));
+
+      //   await CaregiverQualifications.insertMany(qualificationDocs);
+      // }
     }
 
-    res.json({ message: "Profile updated successfully" });
+    res.status(200).json({ message: "Profile updated successfully" });
   } catch (error) {
     console.error("Error updating profile:", error);
     res.status(500).json({ message: "Server error" });

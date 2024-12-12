@@ -72,7 +72,7 @@ const BookingPage = () => {
           {isDarkMode ? "Light" : "Dark"}
         </button>
       </div>
-      <h1>Your Appointments</h1>
+      <h1>Your Bookings</h1>
       {loading ? (
         <p>Loading appointments...</p>
       ) : appointments.length > 0 ? (
@@ -91,8 +91,7 @@ const BookingPage = () => {
             {appointments.map((appointment) => (
               <tr key={appointment._id}>
                 <td>
-                  {appointment.CaregiverID?.UserID?.FirstName}{" "}
-                  {appointment.CaregiverID?.UserID?.LastName}
+                  {appointment.CaregiverID?.UserID?.FirstName} {appointment.CaregiverID?.UserID?.LastName}
                 </td>
                 <td>{appointment.Date}</td>
                 <td>{appointment.Time}</td>
@@ -104,10 +103,7 @@ const BookingPage = () => {
                 <td>{appointment.StatusID}</td>
                 <td>
                   {appointment.StatusID === "pending" && (
-                    <button
-                      className="cancel-btn"
-                      onClick={() => cancelAppointment(appointment._id)}
-                    >
+                    <button className="cancel-btn" onClick={() => cancelAppointment(appointment._id)}>
                       Cancel
                     </button>
                   )}

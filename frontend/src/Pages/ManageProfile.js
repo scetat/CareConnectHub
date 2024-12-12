@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "../css/manageProfile.css";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
-import DayAvailability from "../components/DayAvailability";
 
 const ProfileSection = ({ title, children }) => (
   <section className="profile-section">
@@ -21,6 +20,7 @@ const ManageProfile = () => {
   const [caregiverData, setCaregiverData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -39,21 +39,24 @@ const ManageProfile = () => {
         }
 
         const data = await response.json();
+        console.log("data: ", data);
+
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
 
         // Set user data and caregiver data (if available) in state
         setUserData({
           email: data.email,
           address: data.address,
           phone: data.phone,
-          role: data.role,
+          role: user.role,
         });
 
-        if (data.role === "Caregiver") {
+        if (user.role === "Caregiver" && data.caregiverData) {
           setCaregiverData({
-            experience: data.caregiverData.experience,
-            hourlyRate: data.caregiverData.hourlyRate,
-            qualifications: data.caregiverData.qualifications,
-            availability: data.caregiverData.availability,
+            experience: data.caregiverData.experience || "",
+            hourlyRate: data.caregiverData.hourlyRate.$numberDecimal || "",
+            qualifications: data.caregiverData.qualifications || "",
+            availability: data.caregiverData.availability || {},
           });
         }
 
@@ -87,81 +90,142 @@ const ManageProfile = () => {
 
   const qualificationOptions = ["CNA", "LPN", "RN", "Home Health Aide", "Personal Care Assistant"];
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  // Handler for updating personal information
+  const handlePersonalInfoSubmit = async (e) => {
+    e.preventDefault();
+    setSuccessMessage("");
+    setError("");
 
+    try {
+      const response = await fetch("http://localhost:8000/api/profile", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userData,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.message || "Error updating personal information");
+      }
+
+      const resData = await response.json();
+      alert(resData.message || "Personal information updated successfully");
+      return;
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  // Handler for updating caregiver information
+  const handleCaregiverInfoSubmit = async (e) => {
+    e.preventDefault();
+    setSuccessMessage("");
+    setError("");
+
+    if (userData.role !== "Caregiver") {
+      setError("Only caregivers can update caregiver information.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8000/api/profile", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          caregiverData,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.message || "Error updating caregiver information");
+      }
+
+      const resData = await response.json();
+      alert(resData.message || "Caregiver information updated successfully");
+      return;
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  // Display both success and error messages
   return (
     <div className="manage-profile">
       <h1>Manage Profile</h1>
+      {error && <div className="error-message">{error}</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
 
-      <ProfileSection title="Personal Information">
-        <form>
+      {/* Personal Information Form */}
+      <form onSubmit={handlePersonalInfoSubmit}>
+        <ProfileSection title="Personal Information">
           <InputField
             label="Email"
             type="email"
             value={userData.email}
             onChange={handleUserDataChange("email")}
+            required
           />
           <InputField
             label="Address"
             type="text"
+            disabled={true}
             value={userData.address}
             onChange={handleUserDataChange("address")}
+            required
           />
           <InputField
             label="Phone"
             type="tel"
             value={userData.phone}
             onChange={handleUserDataChange("phone")}
+            required
           />
           <button type="submit" className="submit-button">
             Update Personal Information
           </button>
-        </form>
-      </ProfileSection>
+        </ProfileSection>
+      </form>
 
       {/* Conditionally render the Caregiver Information section if the user is a caregiver */}
       {userData.role === "Caregiver" && caregiverData && (
-        <ProfileSection title="Caregiver Information">
-          <form>
+        <form onSubmit={handleCaregiverInfoSubmit}>
+          <ProfileSection title="Caregiver Information">
             <InputField
               label="Experience (years)"
               type="number"
               value={caregiverData.experience}
               onChange={handleCaregiverDataChange("experience")}
+              required
             />
             <InputField
               label="Hourly Rate ($)"
               type="number"
               value={caregiverData.hourlyRate}
               onChange={handleCaregiverDataChange("hourlyRate")}
+              required
             />
             <SelectField
               label="Qualifications"
               options={qualificationOptions}
               value={caregiverData.qualifications}
               onChange={handleCaregiverDataChange("qualifications")}
+              required
             />
-
-            <div className="availability-section">
-              <h3>Availability</h3>
-              {caregiverData.availability.map((day) => (
-                <DayAvailability
-                  key={day.dayOfWeek}
-                  day={day.dayOfWeek}
-                  start={day.startTime}
-                  end={day.endTime}
-                  onStartChange={handleAvailabilityChange(day.dayOfWeek, "start")}
-                  onEndChange={handleAvailabilityChange(day.dayOfWeek, "end")}
-                />
-              ))}
-            </div>
-
             <button type="submit" className="submit-button">
               Update Caregiver Information
             </button>
-          </form>
-        </ProfileSection>
+          </ProfileSection>
+        </form>
       )}
     </div>
   );

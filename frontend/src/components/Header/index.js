@@ -47,6 +47,7 @@ const Header = () => {
         <img src="/logo.png" alt="Care Connect Hub" />
       </div>
       <div className={`header__nav ${isMenuOpen ? "open" : ""}`}>
+
         {/* Public Links for Non-Admin */}
         {userRole !== "Admin" && (
           <>
@@ -71,22 +72,25 @@ const Header = () => {
             >
               CAREGIVER
             </Link>
-            {isLoggedIn && (
+            {userRole === "Caregiver" && (
               <Link
                 to="/appointment"
                 className={`header__link ${activeLink === "appointment" ? "header__link--active" : ""}`}
                 onClick={() => handleLinkClick("appointment")}
               >
-                APPOINTMENT
+                APPOINTMENTS
               </Link>
             )}
-            <Link
-              to="/BookingPage"
-              className={`header__link ${activeLink === "booking" ? "header__link--active" : ""}`}
-              onClick={() => handleLinkClick("booking")}
-            >
-              BOOKING
-            </Link>
+            {userRole === "Caretaker" && (
+              <Link
+                to="/BookingPage"
+                className={`header__link ${activeLink === "booking" ? "header__link--active" : ""}`}
+                onClick={() => handleLinkClick("booking")}
+              >
+                BOOKING
+              </Link>
+            )}
+
             <Link
               to="/about"
               className={`header__link ${activeLink === "about" ? "header__link--active" : ""}`}
@@ -107,6 +111,7 @@ const Header = () => {
             >
               ADMIN EVENT
             </Link>
+
           {/* 
   <Link
     to="/ManageUser"
