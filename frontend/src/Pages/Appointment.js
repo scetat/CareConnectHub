@@ -3,32 +3,34 @@ import "../css/appointments.css";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
+  const [sortedAppointments, setSortedAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cancellationReason, setCancellationReason] = useState("");
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [sortOrder, setSortOrder] = useState("latest"); // New state for sort order
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
-        const role = user?.role || "guest";
-        const endpoint =
-          role === "Caretaker"
-            ? "http://localhost:8000/api/appointments"
-            : "http://localhost:8000/api/appointments/caregiver";
+        if (user.role === "Caregiver") {
+          const endpoint = "http://localhost:8000/api/appointments";
+          const response = await fetch(endpoint, {
+            credentials: "include",
+          });
 
-        const response = await fetch(endpoint, {
-          credentials: "include",
-        });
+          if (!response.ok) {
+            const res = await response.json();
+            throw new Error(res.message);
+          }
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch appointments.");
+          const data = await response.json();
+          setAppointments(data);
+          setLoading(false);
+        } else {
+          throw new Error("Unauthorized! You cannot view this page");
         }
-
-        const data = await response.json();
-        setAppointments(data);
-        setLoading(false);
       } catch (error) {
         setError(error.message);
         setLoading(false);
@@ -37,6 +39,19 @@ const Appointments = () => {
 
     fetchAppointments();
   }, []);
+
+  useEffect(() => {
+    const sorted = [...appointments].sort((a, b) => {
+      const dateA = new Date(a.Date);
+      const dateB = new Date(b.Date);
+      if (sortOrder === "latest") {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
+    });
+    setSortedAppointments(sorted);
+  }, [appointments, sortOrder]);
 
   const handleCancel = async () => {
     if (!cancellationReason.trim()) {
@@ -47,10 +62,7 @@ const Appointments = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const role = user?.role || "guest";
-      const cancelEndpoint =
-        role === "Caretaker"
-          ? `http://localhost:8000/api/appointments/${selectedAppointment}/cancel`
-          : `http://localhost:8000/api/appointments/${selectedAppointment}/caregiver-cancel`;
+      const cancelEndpoint = `http://localhost:8000/api/appointments/${selectedAppointment}/cancel`;
 
       const response = await fetch(cancelEndpoint, {
         method: "PUT",
@@ -60,7 +72,8 @@ const Appointments = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to cancel appointment.");
+        const res = await response.json();
+        throw new Error(res.message);
       }
 
       setAppointments((prev) => prev.filter((appointment) => appointment._id !== selectedAppointment));
@@ -68,36 +81,36 @@ const Appointments = () => {
       setSelectedAppointment(null);
       setCancellationReason("");
     } catch (error) {
-      alert("Error cancelling appointment.");
+      alert(error.message);
     }
+  };
+
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
   };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const isCaretaker = user?.role === "Caretaker";
-
   return (
     <div className="appointments">
       <h1>Your Appointments</h1>
-      {appointments.length === 0 ? (
+
+      {/* Sort Dropdown */}
+      <div className="sort-container">
+        <label htmlFor="sortOrder">Sort by: </label>
+        <select id="sortOrder" value={sortOrder} onChange={handleSortChange} className="sort-dropdown">
+          <option value="latest">Latest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
+
+      {sortedAppointments.length === 0 ? (
         <p className="no-appointments-message">You currently have no appointments scheduled.</p>
       ) : (
         <div className="appointment-cards">
-          {appointments.map((appointment) => (
+          {sortedAppointments.map((appointment) => (
             <div className="appointment-card" key={appointment._id}>
-              {isCaretaker && appointment.CaregiverID && (
-                <img
-                  src={
-                    appointment.CaregiverID.PhotoURL
-                      ? appointment.CaregiverID.PhotoURL
-                      : "https://picsum.photos/100"
-                  }
-                  alt="Caregiver"
-                  className="appointment-image"
-                />
-              )}
               <div className="appointment-details">
                 <h2>
                   {new Date(appointment.Date).toLocaleDateString("en-US", {
@@ -106,23 +119,30 @@ const Appointments = () => {
                     year: "numeric",
                   })}
                 </h2>
-                <p>
-                  Time:{" "}
-                  {new Date(appointment.Date).toLocaleTimeString("en-US", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </p>
-                <p>
-                  Address: {appointment.AddressID?.houseNo}, {appointment.AddressID?.Street},{" "}
-                  {appointment.AddressID?.City}, {appointment.AddressID?.ZipCode}
-                </p>
-                {appointment.CaregiverID && (
+                {appointment.UserID && (
                   <p>
-                    Caregiver Name: {appointment.CaregiverID.UserID.FirstName}{" "}
-                    {appointment.CaregiverID.UserID.LastName}
+                    Client Name:{" "}
+                    <b>
+                      {appointment.UserID.FirstName} {appointment.UserID.LastName}
+                    </b>
                   </p>
                 )}
+                <p>
+                  Time:{" "}
+                  <b>
+                    {new Date(appointment.Date).toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </b>
+                </p>
+                <p>
+                  Address:{" "}
+                  <b>
+                    {appointment.AddressID?.houseNo}, {appointment.AddressID?.Street},{" "}
+                    {appointment.AddressID?.City}, {appointment.AddressID?.ZipCode}{" "}
+                  </b>
+                </p>
                 <button className="cancel-button" onClick={() => setSelectedAppointment(appointment._id)}>
                   Cancel
                 </button>
@@ -131,6 +151,7 @@ const Appointments = () => {
           ))}
         </div>
       )}
+
       {selectedAppointment && (
         <div className="cancel-modal">
           <div className="modal-content">
@@ -141,9 +162,6 @@ const Appointments = () => {
               onChange={(e) => setCancellationReason(e.target.value)}
             ></textarea>
             <div className="modal-actions">
-              <button className="confirm-button" onClick={handleCancel}>
-                Confirm
-              </button>
               <button
                 className="cancel-button"
                 onClick={() => {
@@ -152,6 +170,9 @@ const Appointments = () => {
                 }}
               >
                 Close
+              </button>
+              <button className="confirm-button-appointments" onClick={handleCancel}>
+                Confirm
               </button>
             </div>
           </div>

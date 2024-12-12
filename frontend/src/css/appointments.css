@@ -2,7 +2,7 @@
   font-family: "Montserrat", sans-serif;
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .appointments h1 {
@@ -143,15 +143,37 @@
   margin-top: 1rem;
 }
 
-.confirm-button {
+.confirm-button-appointments {
   padding: 0.5rem 1rem;
   background-color: #4caf50; 
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
-.confirm-button:hover {
+.confirm-button-appointments:hover {
   background-color: #45a049;
+}
+
+.sort-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+.sort-container label {
+  margin-right: 10px;
+  font-weight: bold;
+  min-width: 5rem;
+}
+
+.sort-dropdown {
+  padding: 5px 10px;
+  font-size: 16px;
 }
