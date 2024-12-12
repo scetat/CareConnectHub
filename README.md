@@ -63,7 +63,7 @@ This repository contains separate directories for the frontend and backend. To r
    ```bash
    node seeders/seedHomeContent.js
    ```
-
+ do the same for the other seeder files
 4. Start the backend server:
    ```bash
    npm start
