@@ -79,6 +79,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <p>
+          <a href="/forgot-passwprd ">Forgot Password? </a>
+        </p>
+
         </div>
 
         <button type="submit" className="login-button">
@@ -87,6 +91,7 @@ const Login = () => {
 
         {error && <p className="error-message">{error}</p>}
       </form>
+
 
       <div className="login-signup-link">
         <p>

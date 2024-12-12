@@ -17,6 +17,8 @@ import AdminEvent from "./Pages/AdminEvent";
 import BookingPage from "./Pages/BookingPage";
 // New Admin Manage Users Page
 import "./index.css";
+import PrivateRoute from "./components/PrivateRoute";
+import ForgotPassword from "./Pages/ForgotPassword";
 
 function App() {
   return (
@@ -34,14 +36,22 @@ function App() {
         <Route path="/manage" element={<ManageProfile />} />
         <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/moreinfo" element={<Moreinfo />} />
-        <Route path="/AppointmentPage" element={<AppointmentPage />}/>
-        <Route path="/Appointment" element={<Appointment />}/>
-         <Route path="/AdminEvent" element={<AdminEvent />}/>
-         <Route path="/BookingPage" element={<BookingPage />}/>
+        <Route path="/AppointmentPage" element={<AppointmentPage />} />
+        <Route path="/Appointment" element={<Appointment />} />
+        <Route path="/forgot-passwprd" element={<ForgotPassword />} />
+
+
+        <Route path="/AdminEvent" element={
+          <PrivateRoute>
+            <AdminEvent />
+          </PrivateRoute>
+        } />
+
+        <Route path="/BookingPage" element={<BookingPage />} />
 
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-       
+
         {/* Redirect to Home for unknown routes */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

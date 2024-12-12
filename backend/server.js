@@ -17,7 +17,7 @@ const path = require("path");
 const app = express();
 
 const mongoUrl =
-  "mongodb+srv://atarsariya4295:Adarsh1202@cluster0.czaz8uw.mongodb.net/";
+  "mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/";
 
 // Middleware to handle JSON requests
 app.use(express.json());
