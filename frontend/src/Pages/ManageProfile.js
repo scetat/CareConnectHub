@@ -25,7 +25,7 @@ const ManageProfile = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/profile", {
+        const response = await fetch("https://careconnecthub-backend.onrender.com/api/profile", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -97,7 +97,7 @@ const ManageProfile = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8000/api/profile", {
+      const response = await fetch("https://careconnecthub-backend.onrender.com/api/profile", {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -133,7 +133,7 @@ const ManageProfile = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/profile", {
+      const response = await fetch("https://careconnecthub-backend.onrender.com/api/profile", {
         method: "PUT",
         credentials: "include",
         headers: {

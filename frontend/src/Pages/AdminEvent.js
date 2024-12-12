@@ -22,7 +22,7 @@ const AdminEvent = () => {
 
   // Fetch events from the admin route
   useEffect(() => {
-    fetch("http://localhost:8000/api/admin/events") // Use the new admin route
+    fetch("https://careconnecthub-backend.onrender.com/api/admin/events") // Use the new admin route
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error("Error fetching events:", error));
@@ -39,7 +39,7 @@ const AdminEvent = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/admin/events/add", {
+      const response = await fetch("https://careconnecthub-backend.onrender.com/api/admin/events/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,9 +72,12 @@ const AdminEvent = () => {
   // Handle event deletion
   const handleDeleteEvent = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/events/delete/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://careconnecthub-backend.onrender.com/api/admin/events/delete/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -92,7 +95,7 @@ const AdminEvent = () => {
 
   // Fetch events function
   const fetchEvents = () => {
-    fetch("http://localhost:8000/api/admin/events")
+    fetch("https://careconnecthub-backend.onrender.com/api/admin/events")
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error("Error fetching events:", error));

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -6,14 +6,14 @@ const ManageUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/users');
+        const response = await fetch("https://careconnecthub-backend.onrender.com/api/users");
         if (!response.ok) {
-          throw new Error('Failed to fetch users');
+          throw new Error("Failed to fetch users");
         }
         const data = await response.json();
         setUsers(data);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error("Error fetching users:", error);
       }
     };
 
@@ -34,9 +34,12 @@ const ManageUsers = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.FirstName} {user.LastName}</td> {/* Corrected */}
+              <td>
+                {user.FirstName} {user.LastName}
+              </td>{" "}
+              {/* Corrected */}
               <td>{user.Email}</td>
-              <td>{user.Role ? user.Role.RoleName : 'No Role'}</td> {/* Handle Role correctly */}
+              <td>{user.Role ? user.Role.RoleName : "No Role"}</td> {/* Handle Role correctly */}
             </tr>
           ))}
         </tbody>

@@ -14,7 +14,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8000/api/auth/login", {
+    const response = await fetch("https://careconnecthub-backend.onrender.com/api/auth/login", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -80,9 +80,8 @@ const Login = () => {
             required
           />
           <p>
-          <a href="/forgot-passwprd ">Forgot Password? </a>
-        </p>
-
+            <a href="/forgot-passwprd ">Forgot Password? </a>
+          </p>
         </div>
 
         <button type="submit" className="login-button">
@@ -91,7 +90,6 @@ const Login = () => {
 
         {error && <p className="error-message">{error}</p>}
       </form>
-
 
       <div className="login-signup-link">
         <p>

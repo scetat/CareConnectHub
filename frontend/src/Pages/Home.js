@@ -15,7 +15,7 @@ const Home = () => {
     const fetchHomeContent = async () => {
       const user = JSON.parse(localStorage.getItem("user"));
       const role = user?.role || "guest";
-      const apiUrl = `http://localhost:8000/api/home?role=${role}`;
+      const apiUrl = `https://careconnecthub-backend.onrender.com/api/home?role=${role}`;
 
       if (role === "caregiver" || role === "caretaker") {
         const cachedContent = localStorage.getItem("homeContent");
@@ -61,7 +61,7 @@ const Home = () => {
   return (
     <div className={`home ${isDarkMode ? "dark-theme" : "light-theme"}`}>
       <button onClick={toggleTheme} className="theme-toggle">
-        {isDarkMode ? "Light" : "Dark"} 
+        {isDarkMode ? "Light" : "Dark"}
       </button>
       <HeroSection heroImage={homeContent.heroImage} heroText={homeContent.heroText} />
       <main className="main-content">
