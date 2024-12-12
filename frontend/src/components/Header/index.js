@@ -47,6 +47,8 @@ const Header = () => {
         <img src="/logo.png" alt="Care Connect Hub" />
       </div>
       <div className={`header__nav ${isMenuOpen ? "open" : ""}`}>
+
+        {/* Public Links for Non-Admin */}
         {userRole !== "Admin" && (
           <>
             <Link
@@ -99,7 +101,7 @@ const Header = () => {
           </>
         )}
 
-        {/* Conditionally render the Admin Event link */}
+        {/* Admin Links */}
         {userRole === "Admin" && (
           <>
             <Link
@@ -109,6 +111,19 @@ const Header = () => {
             >
               ADMIN EVENT
             </Link>
+
+          {/* 
+  <Link
+    to="/ManageUser"
+    className={`header__link ${activeLink === "manage-users" ? "header__link--active" : ""}`}
+    onClick={() => handleLinkClick("manage-users")}
+  >
+    MANAGE USERS
+  </Link>
+*/}
+
+         
+           
             <Link
               to="/events"
               className={`header__link ${activeLink === "events" ? "header__link--active" : ""}`}
@@ -120,7 +135,7 @@ const Header = () => {
         )}
       </div>
 
-      {/* Conditionally render the profile button with dropdown */}
+      {/* Profile Dropdown for Logged-In Users */}
       {isLoggedIn ? (
         <div className="header__profile-container">
           <button className="header__profile" onClick={toggleDropdown}>

@@ -20,6 +20,7 @@ import Feedback from './Pages/Feedback';
 import "./index.css";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./Pages/ForgotPassword";
+import ManageUsers from "./Pages/ManageUsers"; // Admin Manage Users Page
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/BookingPage" element={<BookingPage />}/>
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/forgot-passwprd" element={<ForgotPassword />} />
+       
 
 
         <Route path="/AdminEvent" element={
@@ -50,6 +52,12 @@ function App() {
             <AdminEvent />
           </PrivateRoute>
         } />
+        <Route path="/ManageUser" element={
+          <PrivateRoute>
+            <ManageUsers />
+          </PrivateRoute>
+        } />
+
 
         <Route path="/BookingPage" element={<BookingPage />} />
 

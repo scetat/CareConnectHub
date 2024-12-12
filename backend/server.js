@@ -12,6 +12,7 @@ const caregiversRoute = require("./routes/caregiver");
 const profileRoute = require("./routes/profile");
 const Adminroutes = require("./routes/Adminroutes");
 const Appointment = require("./routes/appointment");
+const userRoutes = require('./routes/userRoutes');
 const path = require("path");
 
 const app = express();
@@ -68,6 +69,7 @@ app.use("/api/caregiver", caregiversRoute);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/admin/events", Adminroutes); 
 app.use('/api/appointment', Appointment);
+app.use('/api/user', userRoutes);
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));

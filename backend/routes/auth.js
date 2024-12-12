@@ -153,4 +153,13 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find().populate('Role').populate('Address'); // Fetch all users with populated fields
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+
 module.exports = router;
