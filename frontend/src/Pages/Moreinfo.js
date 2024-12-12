@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/Moreinfo.css';
+import Caregiverimg from '../Assests/images/C2.jpg'; 
 
 const Moreinfo = () => {
   const location = useLocation();
@@ -39,7 +40,7 @@ const Moreinfo = () => {
       <div className="card-body">
         <div className="placeholder-image">
           <img
-            src={caregiver.profileImage || ""} // Add image URL from caregiver data if available
+            src={Caregiverimg}
             alt="Caregiver"
             className="caregiver-main-photo"
           />
