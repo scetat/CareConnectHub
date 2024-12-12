@@ -24,7 +24,7 @@ const mongoUrl =
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://careconnecthub.onrender.com/" || "http://localhost:3000",
+    origin: ["https://careconnecthub.onrender.com", "http://localhost:3000"],
     credentials: true,
   })
 );
