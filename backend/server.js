@@ -18,13 +18,13 @@ const path = require("path");
 const app = express();
 
 const mongoUrl =
-  "mongodb+srv://chiragcanada90:Range@cluster0.iou3qzc.mongodb.net/";
+  "mongodb+srv://ogbunnamdi:cerberus@cluster0.7gol3ju.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/";
 
 // Middleware to handle JSON requests
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://careconnecthub.onrender.com/" || "http://localhost:3000",
     credentials: true,
   })
 );
@@ -67,9 +67,8 @@ app.use("/api/home", homeRoute);
 
 app.use("/api/caregiver", caregiversRoute);
 app.use("/api/appointments", appointmentRoutes);
-app.use("/api/admin/events", Adminroutes); 
-app.use('/api/appointment', Appointment);
-app.use('/api/user', userRoutes);
+app.use("/api/admin/events", Adminroutes);
+app.use("/api/appointment", Appointment);
 
 // Serve React app
 app.use(express.static(path.join(__dirname, "client/build")));
