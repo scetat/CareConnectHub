@@ -15,7 +15,7 @@ const Appointments = () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user.role === "Caregiver") {
-          const endpoint = "http://localhost:8000/api/appointments";
+          const endpoint = "https://careconnecthub-backend.onrender.com/api/appointments";
           const response = await fetch(endpoint, {
             credentials: "include",
           });
@@ -62,7 +62,7 @@ const Appointments = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const role = user?.role || "guest";
-      const cancelEndpoint = `http://localhost:8000/api/appointments/${selectedAppointment}/cancel`;
+      const cancelEndpoint = `https://careconnecthub-backend.onrender.com/api/appointments/${selectedAppointment}/cancel`;
 
       const response = await fetch(cancelEndpoint, {
         method: "PUT",

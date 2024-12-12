@@ -19,7 +19,7 @@ const BookingPage = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8000/api/appointment/user/${userID}`, {
+        const response = await fetch(`https://careconnecthub-backend.onrender.com/api/appointment/user/${userID}`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         });
@@ -44,7 +44,7 @@ const BookingPage = () => {
 
   const cancelAppointment = async (appointmentId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/appointment/cancel/${appointmentId}`, {
+      const response = await fetch(`https://careconnecthub-backend.onrender.com/api/appointment/cancel/${appointmentId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
       });

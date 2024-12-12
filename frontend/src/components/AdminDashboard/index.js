@@ -15,7 +15,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/events");
+        const response = await fetch("https://careconnecthub-backend.onrender.com/api/events");
         if (response.ok) {
           const data = await response.json();
           setEvents(data);
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
   // Add event
   const addEvent = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/events/add", {
+      const response = await fetch("https://careconnecthub-backend.onrender.com/api/events/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
   // Delete event
   const deleteEvent = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/events/${id}`, {
+      const response = await fetch(`https://careconnecthub-backend.onrender.com/api/events/${id}`, {
         method: "DELETE",
       });
 

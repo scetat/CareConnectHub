@@ -13,7 +13,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8000/api/auth/forgot-password", {
+    const response = await fetch("https://careconnecthub-backend.onrender.com/api/auth/forgot-password", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -80,7 +80,9 @@ const ForgotPassword = () => {
       </form>
 
       <div className="login-signup-link">
-        <p>Remembered your password? <a href="/login">Login here</a></p>
+        <p>
+          Remembered your password? <a href="/login">Login here</a>
+        </p>
       </div>
     </div>
   );

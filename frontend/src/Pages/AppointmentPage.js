@@ -70,7 +70,7 @@ const AppointmentPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/appointment/create", {
+      const response = await fetch("https://careconnecthub-backend.onrender.com/api/appointment/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

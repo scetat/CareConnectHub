@@ -39,7 +39,7 @@ export default function SignUpPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/auth/signup", {
+      const response = await fetch("https://careconnecthub-backend.onrender.com/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
