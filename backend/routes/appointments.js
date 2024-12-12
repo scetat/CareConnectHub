@@ -1,86 +1,52 @@
 const express = require("express");
 const Appointment = require("../models/Appointment");
-const AppointmentStatus = require("../models/AppointmentStatus");
-const Address = require("../models/Address");
-const Client = require("../models/Client");
+const Caregiver = require("../models/Caregiver");
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const caretakerId = req.session.user?.id; // Assuming session stores caretaker's user ID
-    if (!caretakerId) {
+    const userId = req.session.user?.id;
+    const caregiver = await Caregiver.findOne({ UserID: userId });
+    if (!caregiver) {
       return res.status(401).json({ message: "Unauthorized" });
     }
+    const caregiverId = caregiver._id;
 
-    const appointments = await Appointment.find({ ClientID: caretakerId })
-      .populate({
-        path: "CaregiverID",
-        populate: { path: "UserID", select: "FirstName LastName" },
-      })
-      .populate({
-        path: "CaregiverID",
-        select: "PhotoURL",
-      })
+    const appointments = await Appointment.find({ CaregiverID: caregiverId, StatusID: "pending" })
+      .populate("UserID", "FirstName LastName")
       .populate("StatusID", "StatusName")
       .populate("AddressID");
 
+    console.log(appointments);
+
     res.status(200).json(appointments);
   } catch (error) {
-    console.error("Error fetching appointments:", error);
+    console.error("Error fetching caregiver appointments:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
 router.put("/:id/cancel", async (req, res) => {
   try {
-    const caretakerId = req.session.user?.id;
     const { id } = req.params;
 
     const appointment = await Appointment.findById(id);
-    if (!appointment || appointment.ClientID.toString() !== caretakerId) {
-      return res.status(404).json({ message: "Appointment not found" });
+
+    if (!appointment) {
+      return res.status(404).json({ success: false, message: "Appointment not found." });
     }
 
-    const upcomingStatus = await AppointmentStatus.findOne({
-      StatusName: "Upcoming",
-    });
-    if (!upcomingStatus || appointment.StatusID.toString() !== upcomingStatus._id.toString()) {
-      return res.status(400).json({ message: "Only upcoming appointments can be cancelled" });
+    if (appointment.StatusID === "cancelled") {
+      return res.status(400).json({ success: false, message: "Appointment is already cancelled." });
     }
 
-    const cancelledStatus = await AppointmentStatus.findOne({
-      StatusName: "Cancelled",
-    });
-    if (!cancelledStatus) {
-      return res.status(500).json({ message: "Appointment status not configured" });
-    }
-
-    appointment.StatusID = cancelledStatus._id;
+    appointment.StatusID = "cancelled";
     await appointment.save();
 
-    res.status(200).json({ message: "Appointment cancelled successfully" });
+    res.status(200).json({ success: true, message: "Appointment cancelled successfully." });
   } catch (error) {
     console.error("Error cancelling appointment:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-router.get("/caregiver", async (req, res) => {
-  try {
-    const caregiverId = req.session.user?.id;
-    if (!caregiverId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    const appointments = await Appointment.find({ CaregiverID: caregiverId })
-      .populate("ClientID", "FirstName LastName")
-      .populate("StatusID", "StatusName")
-      .populate("AddressID");
-
-    res.status(200).json(appointments);
-  } catch (error) {
-    console.error("Error fetching caregiver appointments:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
