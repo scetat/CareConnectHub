@@ -1,7 +1,7 @@
 /* Card Container */
 .caregiver-card {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     background-color: #f9f9f9;
     border-radius: 12px;
     border: 1px solid #d3d3d3;
@@ -11,7 +11,6 @@
     font-family: 'Arial', sans-serif;
     transition: all 0.3s ease;
 }
-
 
 @media (max-width: 768px) {
     .caregiver-card {
@@ -133,7 +132,8 @@
 }
 
 .cancel_button,
-.book-button {
+.book-button,
+.feedback-button{
     border-width: 1px;
     border-color: #00204A;
     padding: 10px 15px;
@@ -155,7 +155,8 @@
     color: white;
 }
 
-.book-button {
+.book-button,
+.feedback-button {
     background-color: #00204A;
     color: white;
     border-radius: 50px; 
